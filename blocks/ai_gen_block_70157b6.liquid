@@ -1,0 +1,423 @@
+{% doc %}
+  @prompt
+    Create a responsive "Our Partners" logo carousel section for a Shopify homepage.
+    
+    Requirements:
+    - Section title: "Our Partners"
+    - Center aligned heading
+    - Logo carousel / slider layout
+    - Auto-play enabled
+    - Infinite loop enabled
+    - Smooth sliding animation
+    - Pause on hover (desktop)
+    - Draggable and reorderable section
+    - Fully responsive
+    
+    Desktop: Show 5 logos per row
+    Tablet: Show 3 logos per row
+    Mobile: Show 2 logos per row
+    
+    Design:
+    - Light grey background (#f8f8f8)
+    - Equal logo height (70px)
+    - Logos in grayscale
+    - On hover: show original color
+    - Even spacing between logos
+    - Clean, premium, minimal style
+    
+    Make the section editable so I can easily replace logos.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-partners-carousel-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.padding_top }}px 0 {{ block.settings.padding_bottom }}px;
+  }
+
+  .ai-partners-carousel__container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.container_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .ai-partners-carousel__heading-{{ ai_gen_id }} {
+    text-align: center;
+    margin: 0 0 {{ block.settings.heading_spacing }}px;
+    font-size: {{ block.settings.heading_size }}px;
+    color: {{ block.settings.heading_color }};
+  }
+
+  .ai-partners-carousel__track-wrapper-{{ ai_gen_id }} {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .ai-partners-carousel__track-{{ ai_gen_id }} {
+  display: flex;
+  width: max-content;
+  animation: ai-partners-scroll-{{ ai_gen_id }} 25s linear infinite;
+}
+
+  .ai-partners-carousel__track-{{ ai_gen_id }}:hover {
+    animation-play-state: paused;
+  }
+
+  .ai-partners-carousel__item-{{ ai_gen_id }} {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .ai-partners-carousel__logo-{{ ai_gen_id }} {
+    height: {{ block.settings.logo_height }}px;
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
+    filter: none;
+    opacity: 1;
+    transition: all 0.3s ease;
+  }
+
+  .ai-partners-carousel__logo-{{ ai_gen_id }}:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.05);
+  }
+
+  @keyframes ai-partners-scroll-{{ ai_gen_id }} {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-partners-carousel__heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.8 }}px;
+    }
+
+    .ai-partners-carousel__logo-{{ ai_gen_id }} {
+      height: {{ block.settings.logo_height | times: 0.8 }}px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-partners-carousel-{{ ai_gen_id }} {
+      padding: {{ block.settings.padding_top | times: 0.7 }}px 0 {{ block.settings.padding_bottom | times: 0.7 }}px;
+    }
+
+    .ai-partners-carousel__heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.7 }}px;
+      margin-bottom: {{ block.settings.heading_spacing | times: 0.7 }}px;
+    }
+
+    .ai-partners-carousel__logo-{{ ai_gen_id }} {
+      height: 120px !important; /* Increase size */
+    }
+
+
+  @media screen and (max-width: 749px) {
+  .ai-partners-carousel__track-{{ ai_gen_id }} {
+    animation: ai-partners-scroll-{{ ai_gen_id }} 10s linear infinite !important;
+  }
+
+  @media screen and (max-width: 749px) {
+  .ai-partners-carousel__track-{{ ai_gen_id }} {
+    animation-name: ai-partners-scroll-{{ ai_gen_id }} !important;
+    animation-duration: 50s !important;
+    animation-timing-function: linear !important;
+    animation-iteration-count: infinite !important;
+  }
+}
+  
+{% endstyle %}
+
+<partners-carousel-{{ ai_gen_id }}
+  class="ai-partners-carousel-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-partners-carousel__container-{{ ai_gen_id }}">
+    {% if block.settings.heading != blank %}
+      <h2 class="ai-partners-carousel__heading-{{ ai_gen_id }}">
+        {{ block.settings.heading }}
+      </h2>
+    {% endif %}
+
+    <div class="ai-partners-carousel__track-wrapper-{{ ai_gen_id }}">
+      <div class="ai-partners-carousel__track-{{ ai_gen_id }}">
+        {% for i in (1..14) %}
+          {% assign logo_key = 'logo_' | append: i %}
+          {% assign logo = block.settings[logo_key] %}
+          
+          {% if logo != blank %}
+            <div class="ai-partners-carousel__item-{{ ai_gen_id }}">
+              <img
+                src="{{ logo | image_url: width: 400 }}"
+                alt="Partner logo {{ i }}"
+                class="ai-partners-carousel__logo-{{ ai_gen_id }}"
+                loading="lazy"
+                width="200"
+                height="{{ block.settings.logo_height }}"
+              >
+            </div>
+          {% endif %}
+        {% endfor %}
+
+        {% for i in (1..12) %}
+          {% assign logo_key = 'logo_' | append: i %}
+          {% assign logo = block.settings[logo_key] %}
+          
+          {% if logo != blank %}
+            <div class="ai-partners-carousel__item-{{ ai_gen_id }}">
+              <img
+                src="{{ logo | image_url: width: 400 }}"
+                alt="Partner logo {{ i }}"
+                class="ai-partners-carousel__logo-{{ ai_gen_id }}"
+                loading="lazy"
+                width="200"
+                height="{{ block.settings.logo_height }}"
+              >
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</partners-carousel-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class PartnersCarousel{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.track = this.querySelector('.ai-partners-carousel__track-{{ ai_gen_id }}');
+        this.setupCarousel();
+      }
+
+      setupCarousel() {
+        if (!this.track) return;
+
+        const items = this.track.querySelectorAll('.ai-partners-carousel__item-{{ ai_gen_id }}');
+        
+        if (items.length === 0) return;
+
+        this.track.addEventListener('mouseenter', () => {
+          this.track.style.animationPlayState = 'paused';
+        });
+
+        this.track.addEventListener('mouseleave', () => {
+          this.track.style.animationPlayState = 'running';
+        });
+      }
+    }
+
+    customElements.define('partners-carousel-{{ ai_gen_id }}', PartnersCarousel{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Our partners",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Partners"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "label": "Heading spacing",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#f8f8f8"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container width",
+      "min": 1000,
+      "max": 1600,
+      "step": 50,
+      "unit": "px",
+      "default": 1400
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Carousel"
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "label": "Logo height",
+      "min": 40,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "logo_spacing",
+      "label": "Logo spacing",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed",
+      "label": "Scroll speed",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Partner logos"
+    },
+    {
+      "type": "paragraph",
+      "content": "Add up to 12 partner logos. The carousel will loop infinitely."
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_1",
+      "label": "Logo 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_2",
+      "label": "Logo 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_3",
+      "label": "Logo 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_4",
+      "label": "Logo 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_5",
+      "label": "Logo 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_6",
+      "label": "Logo 6"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_7",
+      "label": "Logo 7"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_8",
+      "label": "Logo 8"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_9",
+      "label": "Logo 9"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_10",
+      "label": "Logo 10"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_11",
+      "label": "Logo 11"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_12",
+      "label": "Logo 12"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_13",
+      "label": "Logo 13"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_14",
+      "label": "Logo 14"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our partners"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,96 @@
+{% schema %}
+{
+  "name": "Responsive Click Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Banner Image"
+    },
+    {
+      "type": "url",
+      "id": "banner_link",
+      "label": "Banner Link (Product / Page)"
+    },
+    {
+      "type": "range",
+      "id": "height_desktop",
+      "label": "Desktop Height",
+      "min": 200,
+      "max": 800,
+      "step": 10,
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "label": "Mobile Height",
+      "min": 150,
+      "max": 500,
+      "step": 10,
+      "default": 250
+    }
+  ],
+  "presets": [
+    {
+      "name": "Responsive Click Banner"
+    }
+  ]
+}
+{% endschema %}
+
+{% assign img = section.settings.banner_image %}
+{% assign link = section.settings.banner_link %}
+
+<style>
+  .rcb-wrapper {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .rcb-banner {
+    width: 100%;
+    display: block;
+    position: relative;
+  }
+
+  .rcb-banner img {
+    width: 100%;
+    max-width: 100%;
+    height: {{ section.settings.height_desktop }}px;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media(max-width: 768px) {
+    .rcb-banner img {
+      height: {{ section.settings.height_mobile }}px;
+    }
+  }
+</style>
+
+<div class="rcb-wrapper">
+  {% if link != blank %}
+    <a href="{{ link }}" class="rcb-banner">
+  {% else %}
+    <div class="rcb-banner">
+  {% endif %}
+
+  {% if img != blank %}
+    <img src="{{ img | image_url: width: 2000 }}" alt="Banner">
+  {% else %}
+    <img src="https://via.placeholder.com/2000x800" alt="Banner">
+  {% endif %}
+
+  {% if link != blank %}
+    </a>
+  {% else %}
+    </div>
+  {% endif %}
+</div>

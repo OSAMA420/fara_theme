@@ -1,0 +1,149 @@
+{% if product.metafields.custom.scent_1.value != blank 
+or product.metafields.custom.scent_2.value != blank 
+or product.metafields.custom.scent_3.value != blank 
+or product.metafields.custom.scent_4.value != blank %}
+
+<div class="scent-profile-section">
+<h3 style="margin-bottom:15px;">Scent Intensity Profile</h3>
+
+{% if product.metafields.custom.scent_1.value != blank %}
+<div class="scent-item">
+<div class="scent-label">
+<span>{{ product.metafields.custom.scent_1.value }}</span>
+<span class="scent-percent" data-percent="{{ product.metafields.custom.scent_1_percent.value }}">0%</span>
+</div>
+
+<div class="scent-bar">
+<div class="scent-fill"
+data-width="{{ product.metafields.custom.scent_1_percent.value }}"
+style="background:#2d7ef7;">
+</div>
+</div>
+</div>
+{% endif %}
+
+{% if product.metafields.custom.scent_2.value != blank %}
+<div class="scent-item">
+<div class="scent-label">
+<span>{{ product.metafields.custom.scent_2.value }}</span>
+<span class="scent-percent" data-percent="{{ product.metafields.custom.scent_2_percent.value }}">0%</span>
+</div>
+
+<div class="scent-bar">
+<div class="scent-fill"
+data-width="{{ product.metafields.custom.scent_2_percent.value }}"
+style="background:#e53935;">
+</div>
+</div>
+</div>
+{% endif %}
+
+{% if product.metafields.custom.scent_3.value != blank %}
+<div class="scent-item">
+<div class="scent-label">
+<span>{{ product.metafields.custom.scent_3.value }}</span>
+<span class="scent-percent" data-percent="{{ product.metafields.custom.scent_3_percent.value }}">0%</span>
+</div>
+
+<div class="scent-bar">
+<div class="scent-fill"
+data-width="{{ product.metafields.custom.scent_3_percent.value }}"
+style="background:#7a8c99;">
+</div>
+</div>
+</div>
+{% endif %}
+
+{% if product.metafields.custom.scent_4.value != blank %}
+<div class="scent-item">
+<div class="scent-label">
+<span>{{ product.metafields.custom.scent_4.value }}</span>
+<span class="scent-percent" data-percent="{{ product.metafields.custom.scent_4_percent.value }}">0%</span>
+</div>
+
+<div class="scent-bar">
+<div class="scent-fill"
+data-width="{{ product.metafields.custom.scent_4_percent.value }}"
+style="background:#333;">
+</div>
+</div>
+</div>
+{% endif %}
+
+</div>
+
+<style>
+.scent-profile-section { margin-top: 20px; }
+.scent-item { margin-bottom: 14px; }
+.scent-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+.scent-bar {
+  width: 100%;
+  height: 6px;
+  background: #eee;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.scent-fill {
+  height: 100%;
+  width: 100%;
+  border-radius: 20px;
+  transform: scaleX(0);
+  transform-origin: left;
+  will-change: transform;
+  transition: transform 2.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+</style>
+
+<script>
+(function () {
+  function initScentBars() {
+    var items = document.querySelectorAll(".scent-item:not([data-animated])");
+    if (!items.length) return;
+
+    var DURATION = 2500;
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var item = entry.target;
+        item.setAttribute("data-animated", "true");
+        observer.unobserve(item);
+
+        var bar = item.querySelector(".scent-fill");
+        var percentEl = item.querySelector(".scent-percent");
+        if (!bar || !percentEl) return;
+
+        var target = parseInt(bar.getAttribute("data-width")) || 0;
+        var scale = target / 100;
+
+        requestAnimationFrame(function () {
+          bar.style.transform = "scaleX(" + scale + ")";
+        });
+
+        var startTime = null;
+        function animateCounter(timestamp) {
+          if (!startTime) startTime = timestamp;
+          var progress = Math.min((timestamp - startTime) / DURATION, 1);
+          percentEl.innerText = Math.round(progress * target) + "%";
+          if (progress < 1) requestAnimationFrame(animateCounter);
+        }
+        requestAnimationFrame(animateCounter);
+      });
+    }, { threshold: 0.3 });
+
+    items.forEach(function (item) {
+      observer.observe(item);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", initScentBars);
+  document.addEventListener("shopify:section:load", initScentBars);
+  document.addEventListener("t4s:product:variant-change", initScentBars);
+})();
+</script>
+{% endif %}
