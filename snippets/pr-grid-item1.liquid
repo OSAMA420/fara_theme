@@ -2,6 +2,9 @@
   assign pr_url = product.url
   assign pid = product.id
   assign isDefault = product.has_only_default_variant
+  if product.variants.size == 1
+    assign isDefault = true
+  endif
   assign pr_variants = product.variants
   assign current_variant = pr_variants.first
   assign isPreoder = false

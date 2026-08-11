@@ -35,7 +35,10 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$Message,
 
-    [switch]$DryRun
+    [switch]$DryRun,
+
+    # Skip the "type yes" prompt before the live push. For non-interactive runs.
+    [switch]$Yes
 )
 
 $ErrorActionPreference = 'Stop'
@@ -184,11 +187,15 @@ if ($toDeploy.Count -eq 0) {
 } else {
     Write-Host ""
     Write-Host "  This updates the LIVE store: $Store" -ForegroundColor Yellow
-    $answer = Read-Host "  Type 'yes' to continue"
-    if ($answer -ne 'yes') {
-        Write-Host ""
-        Write-Host "Stopped. GitHub is updated; the live theme was not touched." -ForegroundColor Yellow
-        exit 0
+    if ($Yes) {
+        Write-Host "  -Yes was passed, continuing without a prompt."
+    } else {
+        $answer = Read-Host "  Type 'yes' to continue"
+        if ($answer -ne 'yes') {
+            Write-Host ""
+            Write-Host "Stopped. GitHub is updated; the live theme was not touched." -ForegroundColor Yellow
+            exit 0
+        }
     }
 
     $pushArgs = @('theme', 'push', "--store=$Store", "--theme=$LiveTheme", '--allow-live', '--nodelete')
