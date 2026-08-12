@@ -467,7 +467,7 @@
                .t4s-search-header__input {
                     background-color: transparent;
                     padding: 0 30px;
-                    height: 50px;
+                    height: {{ se_stts.search_h | default: 42 }}px;
                     border: 0;
                     width: 100%;
                     line-height: 18px;
@@ -853,7 +853,7 @@
                .t4s-search-header__input {
                     background-color: transparent;
                     padding: 0 30px;
-                    height: 50px;
+                    height: {{ se_stts.search_h | default: 42 }}px;
                     border: 0;
                     width: 100%;
                     line-height: 18px;
@@ -1552,6 +1552,17 @@ document.documentElement.style.setProperty('--header-height', document.getElemen
           ],
           "label": "Search box design",
           "default": "2"
+      },
+      {
+          "type": "range",
+          "id": "search_h",
+          "label": "Search box height",
+          "info": "Desktop only. Tablet and mobile keep their own smaller height.",
+          "min": 34,
+          "max": 60,
+          "step": 2,
+          "unit": "px",
+          "default": 42
       },
       {
         "type": "select",
