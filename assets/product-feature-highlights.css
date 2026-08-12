@@ -9,6 +9,18 @@
     display: none;
   }
 }
+/* Pull the block out of the product column's gutter so it spans the screen.
+   Mobile only: 50vw counts the scrollbar on desktop, which would add a
+   horizontal scroll. */
+@media (max-width: 767px){
+  .t4s-feature-highlights.is--full-width{
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 0;
+  }
+}
 .t4s-feature-highlights__heading{
   margin: 0 0 16px;
   font-size: 22px;
