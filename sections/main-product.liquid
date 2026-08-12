@@ -612,6 +612,17 @@ t4option0_0 | alt text
                         assign feat_icon_cl = bk_stts.icon_color_custom | default: bk_stts.icon_color | default: '#D97B29'
                         assign feat_hd_cl = bk_stts.heading_color_custom | default: bk_stts.heading_color | default: '#1a1a1a'
                         assign feat_txt_cl = bk_stts.text_color_custom | default: bk_stts.text_color | default: '#6b6b6b'
+                        comment
+                          When "only show where a colour metafield is set" is on, the block
+                          is skipped unless this product supplies at least one override.
+                        endcomment
+                        assign feat_has_override = false
+                        if bk_stts.bg_color_custom != blank or bk_stts.card_bg_color_custom != blank or bk_stts.icon_bg_color_custom != blank or bk_stts.icon_color_custom != blank or bk_stts.heading_color_custom != blank or bk_stts.text_color_custom != blank
+                          assign feat_has_override = true
+                        endif
+                        if bk_stts.only_with_metafield and feat_has_override == false
+                          continue
+                        endif
                         assign feat_mobile_class = ''
                         if bk_stts.mobile_only
                           assign feat_mobile_class = ' is--mobile-only'
@@ -2342,6 +2353,13 @@ t4option0_0 | alt text
           "id": "mobile_only",
           "label": "Show on mobile only",
           "info": "Hides this block on tablet and desktop (768px and up).",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "only_with_metafield",
+          "label": "Only show on products that have colour metafields",
+          "info": "On: the block is hidden unless the product supplies at least one of the per-product colour overrides below. Off: it shows on every product.",
           "default": true
         },
         {
