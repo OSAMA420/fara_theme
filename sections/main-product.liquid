@@ -601,7 +601,17 @@ t4option0_0 | alt text
                       {{ 'product-feature-highlights.css' | asset_url | stylesheet_tag }}
                       {%- liquid
                         assign feat_heading = bk_stts.heading
+                        comment
+                          Each colour falls back in the same order: the per-product
+                          override (bind it to a product metafield), then the block
+                          colour picker, then a theme default.
+                        endcomment
                         assign feat_bg = bk_stts.bg_color_custom | default: bk_stts.bg_color | default: '#FDF3DC'
+                        assign feat_card_bg = bk_stts.card_bg_color_custom | default: bk_stts.card_bg_color | default: '#ffffff'
+                        assign feat_icon_bg = bk_stts.icon_bg_color_custom | default: bk_stts.icon_bg_color | default: '#FBE7C6'
+                        assign feat_icon_cl = bk_stts.icon_color_custom | default: bk_stts.icon_color | default: '#D97B29'
+                        assign feat_hd_cl = bk_stts.heading_color_custom | default: bk_stts.heading_color | default: '#1a1a1a'
+                        assign feat_txt_cl = bk_stts.text_color_custom | default: bk_stts.text_color | default: '#6b6b6b'
                         assign feat_mobile_class = ''
                         if bk_stts.mobile_only
                           assign feat_mobile_class = ' is--mobile-only'
@@ -621,7 +631,7 @@ t4option0_0 | alt text
                           continue
                         endif
                       -%}
-                      <div class="t4s-feature-highlights{{ feat_mobile_class }}" style="--feat-wrap-bg:{{ feat_bg }};--feat-icon-bg:{{ bk_stts.icon_bg_color | default: '#FBE7C6' }};--feat-icon-color:{{ bk_stts.icon_color | default: '#D97B29' }};--feat-heading-color:{{ bk_stts.heading_color | default: '#1a1a1a' }};--feat-text-color:{{ bk_stts.text_color | default: '#6b6b6b' }};--feat-card-bg:{{ bk_stts.card_bg_color | default: '#ffffff' }}" {{ block.shopify_attributes }}>
+                      <div class="t4s-feature-highlights{{ feat_mobile_class }}" style="--feat-wrap-bg:{{ feat_bg }};--feat-icon-bg:{{ feat_icon_bg }};--feat-icon-color:{{ feat_icon_cl }};--feat-heading-color:{{ feat_hd_cl }};--feat-text-color:{{ feat_txt_cl }};--feat-card-bg:{{ feat_card_bg }}" {{ block.shopify_attributes }}>
                         {%- if feat_heading != blank -%}<h3 class="t4s-feature-highlights__heading">{{ feat_heading }}</h3>{%- endif -%}
                         <div class="t4s-feature-highlights__list">
                           {%- for i in (1..3) -%}
@@ -2341,12 +2351,6 @@ t4option0_0 | alt text
           "default": "#FDF3DC"
         },
         {
-          "type": "text",
-          "id": "bg_color_custom",
-          "label": "Section background override (per product)",
-          "info": "Optional. Hex color e.g. #FDF3DC. Connect this to a product metafield to vary the background per product. Leave blank to use the color picker above."
-        },
-        {
           "type": "header",
           "content": "+ Item 1"
         },
@@ -2448,6 +2452,44 @@ t4option0_0 | alt text
           "id": "text_color",
           "label": "Text color",
           "default": "#6b6b6b"
+        },
+        {
+          "type": "header",
+          "content": "+ Per-product colour overrides"
+        },
+        {
+          "type": "paragraph",
+          "content": "Leave these blank to use the colour pickers above. To give a product its own palette, connect each field to a product metafield (Settings > Custom data > Products) using the dynamic source icon, then set hex values like #4C1A23 on that product."
+        },
+        {
+          "type": "text",
+          "id": "bg_color_custom",
+          "label": "Section background override"
+        },
+        {
+          "type": "text",
+          "id": "card_bg_color_custom",
+          "label": "Card background override"
+        },
+        {
+          "type": "text",
+          "id": "icon_bg_color_custom",
+          "label": "Icon background override"
+        },
+        {
+          "type": "text",
+          "id": "icon_color_custom",
+          "label": "Icon colour override"
+        },
+        {
+          "type": "text",
+          "id": "heading_color_custom",
+          "label": "Heading colour override"
+        },
+        {
+          "type": "text",
+          "id": "text_color_custom",
+          "label": "Text colour override"
         }
       ]
     },
