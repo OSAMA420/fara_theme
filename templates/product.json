@@ -247,7 +247,6 @@
         },
         "feature_highlights_iqrdWH": {
           "type": "feature_highlights",
-          "disabled": true,
           "settings": {
             "heading": "Extra Feature",
             "mobile_only": true,
