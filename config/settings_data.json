@@ -2861,6 +2861,7 @@
           "show_wis": true,
           "show_compare": false,
           "search_design": "2",
+          "search_h": 42,
           "account_des": "1",
           "cart_des": "1",
           "bg_hc": "#000000",

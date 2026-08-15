@@ -77,6 +77,12 @@
           "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {}
         },
+        "custom_liquid_8BfpAH": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<img src=\"https://cdn.shopify.com/s/files/1/0588/7069/4064/files/badges_1.png?v=1786627286\" alt=\"Formulated in France, Trending on Insta\" style=\"max-width:100%; margin-top:10px;\""
+          }
+        },
         "meta_bLLzNK": {
           "type": "meta",
           "settings": {
@@ -245,11 +251,20 @@
             "space_v_item_mb": "2"
           }
         },
+        "custom_liquid_ipXwkh": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"fara-mobile-comparison\">\n  <img\n    src=\"https://cdn.shopify.com/s/files/1/0588/7069/4064/files/FARA_chart.png?v=1786627712\"\n    alt=\"FA'RA London vs The Rest\"\n    loading=\"lazy\"\n  >\n</div>\n\n<style>\n  .fara-mobile-comparison {\n    display: none;\n  }\n\n  @media screen and (max-width: 749px) {\n    .fara-mobile-comparison {\n      display: block;\n      width: 100%;\n      margin: 0;\n      padding: 0;\n    }\n\n    .fara-mobile-comparison img {\n      display: block;\n      width: 100%;\n      height: auto;\n      margin: 20px,0,0,0;\n      padding: 0;\n    }\n  }\n</style>"
+          }
+        },
         "feature_highlights_iqrdWH": {
           "type": "feature_highlights",
+          "disabled": true,
           "settings": {
-            "heading": "Extra Feature",
+            "heading": "PRODUCT FEATURES",
             "mobile_only": true,
+            "full_width": true,
+            "only_with_metafield": true,
             "bg_color": "#bacfe2",
             "item1_icon": "perfume",
             "item1_heading": "Consideration",
@@ -307,6 +322,7 @@
         "d5b7b0a4-fb63-44fc-9d84-10e7223a983d",
         "3eaacecf-c956-46e5-84ef-40474509a065",
         "judge_me_reviews_preview_badge_PjVnmd",
+        "custom_liquid_8BfpAH",
         "meta_bLLzNK",
         "description_P9X3Pp",
         "18a8b200-4f94-4b72-b0eb-01abf185ecb3",
@@ -318,6 +334,7 @@
         "doran_shoppable_videos_basic_widget_RPJTzF",
         "e8f22b12-b4a8-4a95-b4bc-9a0d2c8075c5",
         "6927e5dd-04a4-4db6-a60c-76fab4d0069a",
+        "custom_liquid_ipXwkh",
         "feature_highlights_iqrdWH",
         "custom_liquid_kieHL7",
         "8cb75c19-2a0d-4fb8-9e65-526f24de623b",
