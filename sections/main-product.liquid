@@ -597,6 +597,42 @@ t4option0_0 | alt text
                           {% endif %}
                         </div>
                       {%- endif -%}
+                    {%- when 'product_badges' -%}
+                      {{ 'product-badges.css' | asset_url | stylesheet_tag }}
+                      {%- liquid
+                        comment
+                          A badge only renders when it has text. Bind the text fields
+                          to product metafields and leave them blank here, and the
+                          whole block stays off on products that have no values.
+                        endcomment
+                        assign pbadge_any = false
+                        for i in (1..3)
+                          assign key_txt = 'badge' | append: i | append: '_text'
+                          if bk_stts[key_txt] != blank
+                            assign pbadge_any = true
+                          endif
+                        endfor
+                        if pbadge_any == false
+                          continue
+                        endif
+                      -%}
+                      <div class="t4s-product-badges" style="--pbadge-bg:{{ bk_stts.badge_bg | default: '#ffffff' }};--pbadge-border:{{ bk_stts.badge_border | default: '#e6e6e6' }};--pbadge-text:{{ bk_stts.badge_text_color | default: '#1a1a1a' }};--pbadge-gap:{{ bk_stts.badge_gap | default: 10 }}px" {{ block.shopify_attributes }}>
+                        {%- for i in (1..3) -%}
+                          {%- liquid
+                            assign key_icon = 'badge' | append: i | append: '_icon'
+                            assign key_txt = 'badge' | append: i | append: '_text'
+                            assign b_icon = bk_stts[key_icon] | default: 'verified'
+                            assign b_text = bk_stts[key_txt]
+                            assign b_uid = block.id | append: '-' | append: i
+                          -%}
+                          {%- if b_text != blank -%}
+                            <span class="t4s-product-badge">
+                              <span class="t4s-product-badge__icon">{% render 'icon-product-badge', icon: b_icon, uid: b_uid %}</span>
+                              <span class="t4s-product-badge__text">{{ b_text }}</span>
+                            </span>
+                          {%- endif -%}
+                        {%- endfor -%}
+                      </div>
                     {%- when 'feature_highlights' -%}
                       {{ 'product-feature-highlights.css' | asset_url | stylesheet_tag }}
                       {%- liquid
@@ -2333,6 +2369,97 @@ t4option0_0 | alt text
           "id": "readl_txt",
           "label": "Read less label",
           "default": "Read less"
+        }
+      ]
+    },
+    {
+      "type": "product_badges",
+      "name": "Product badges",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Pill badges such as \"Formulated In France\" or \"Trending On Insta\". A badge only appears when its text is filled in, and the whole block disappears when all three are empty. For per-product badges, create product metafields (Settings > Custom data > Products) and connect each icon and text field below to one using the dynamic source (lightning) icon, leaving the fields blank here."
+        },
+        {
+          "type": "header",
+          "content": "+ Badge 1"
+        },
+        {
+          "type": "text",
+          "id": "badge1_icon",
+          "label": "Icon",
+          "info": "Type one of: instagram, facebook, tiktok, france, globe, award, verified, star, leaf"
+        },
+        {
+          "type": "text",
+          "id": "badge1_text",
+          "label": "Text",
+          "info": "Leave blank to hide this badge."
+        },
+        {
+          "type": "header",
+          "content": "+ Badge 2"
+        },
+        {
+          "type": "text",
+          "id": "badge2_icon",
+          "label": "Icon",
+          "info": "Type one of: instagram, facebook, tiktok, france, globe, award, verified, star, leaf"
+        },
+        {
+          "type": "text",
+          "id": "badge2_text",
+          "label": "Text",
+          "info": "Leave blank to hide this badge."
+        },
+        {
+          "type": "header",
+          "content": "+ Badge 3"
+        },
+        {
+          "type": "text",
+          "id": "badge3_icon",
+          "label": "Icon",
+          "info": "Type one of: instagram, facebook, tiktok, france, globe, award, verified, star, leaf"
+        },
+        {
+          "type": "text",
+          "id": "badge3_text",
+          "label": "Text",
+          "info": "Leave blank to hide this badge."
+        },
+        {
+          "type": "header",
+          "content": "+ Style"
+        },
+        {
+          "type": "color",
+          "id": "badge_bg",
+          "label": "Pill background",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "badge_border",
+          "label": "Pill border",
+          "default": "#e6e6e6"
+        },
+        {
+          "type": "color",
+          "id": "badge_text_color",
+          "label": "Text colour",
+          "default": "#1a1a1a"
+        },
+        {
+          "type": "range",
+          "id": "badge_gap",
+          "label": "Space between badges",
+          "min": 4,
+          "max": 24,
+          "step": 2,
+          "unit": "px",
+          "default": 10
         }
       ]
     },
