@@ -597,6 +597,38 @@ t4option0_0 | alt text
                           {% endif %}
                         </div>
                       {%- endif -%}
+                    {%- when 'comparison_image' -%}
+                      {%- liquid
+                        assign cmp_img = bk_stts.image
+                        if cmp_img == blank
+                          continue
+                        endif
+                        echo 'product-comparison-image.css' | asset_url | stylesheet_tag
+                        assign cmp_class = ''
+                        if bk_stts.visibility == 'mobile'
+                          assign cmp_class = ' is--mobile-only'
+                        elsif bk_stts.visibility == 'desktop'
+                          assign cmp_class = ' is--desktop-only'
+                        endif
+                        if bk_stts.full_width
+                          assign cmp_class = cmp_class | append: ' is--full-width'
+                        endif
+                      -%}
+                      <div class="t4s-pr-compare-img{{ cmp_class }}" style="--cmp-max-w:{{ bk_stts.max_width | default: 600 }}px;--cmp-radius:{{ bk_stts.radius | default: 0 }}px;--cmp-space:{{ bk_stts.space | default: 20 }}px;--cmp-heading-color:{{ bk_stts.heading_color | default: '#1a1a1a' }}" {{ block.shopify_attributes }}>
+                        {%- if bk_stts.heading != blank -%}<p class="t4s-pr-compare-img__heading">{{ bk_stts.heading }}</p>{%- endif -%}
+                        <div class="t4s-pr-compare-img__media t4s_ratio" style="--aspect-ratioapt:{{ cmp_img.aspect_ratio }}">
+                          <img class="lazyloadt4s"
+                               data-src="{{ cmp_img | image_url: width: 1 }}"
+                               data-widths="[320,420,540,640,760,900,1050,1200]"
+                               data-optimumx="2"
+                               data-sizes="auto"
+                               src="{% render 'img_svg', w: cmp_img.width, h: cmp_img.height %}"
+                               width="{{ cmp_img.width }}"
+                               height="{{ cmp_img.height }}"
+                               alt="{{ cmp_img.alt | default: bk_stts.heading | escape }}">
+                          <span class="lazyloadt4s-loader"></span>
+                        </div>
+                      </div>
                     {%- when 'product_badges' -%}
                       {{ 'product-badges.css' | asset_url | stylesheet_tag }}
                       {%- liquid
@@ -2369,6 +2401,83 @@ t4option0_0 | alt text
           "id": "readl_txt",
           "label": "Read less label",
           "default": "Read less"
+        }
+      ]
+    },
+    {
+      "type": "comparison_image",
+      "name": "Comparison image",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "For a full-width picture such as a \"FA'RA vs the rest\" chart. The block is hidden on products with no image, so connect the image to a product metafield (Settings > Custom data > Products, type File) using the dynamic source icon to show a different chart per product, or pick one image here to use it on every product."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "info": "Optional. Shown above the image."
+        },
+        {
+          "type": "select",
+          "id": "visibility",
+          "label": "Show on",
+          "default": "all",
+          "options": [
+            { "value": "all", "label": "All devices" },
+            { "value": "mobile", "label": "Mobile only" },
+            { "value": "desktop", "label": "Desktop only" }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "full_width",
+          "label": "Full width on mobile",
+          "info": "Removes the left and right gap so the image spans the whole screen.",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "max_width",
+          "label": "Maximum width",
+          "info": "Ignored on mobile when full width is on.",
+          "min": 260,
+          "max": 900,
+          "step": 20,
+          "unit": "px",
+          "default": 600
+        },
+        {
+          "type": "range",
+          "id": "radius",
+          "label": "Corner radius",
+          "min": 0,
+          "max": 24,
+          "step": 2,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "space",
+          "label": "Space above and below",
+          "min": 0,
+          "max": 48,
+          "step": 4,
+          "unit": "px",
+          "default": 20
+        },
+        {
+          "type": "color",
+          "id": "heading_color",
+          "label": "Heading colour",
+          "default": "#1a1a1a"
         }
       ]
     },
