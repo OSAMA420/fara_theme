@@ -616,7 +616,13 @@ t4option0_0 | alt text
                       -%}
                       <div class="t4s-pr-compare-img{{ cmp_class }}" style="--cmp-max-w:{{ bk_stts.max_width | default: 600 }}px;--cmp-radius:{{ bk_stts.radius | default: 0 }}px;--cmp-space:{{ bk_stts.space | default: 20 }}px;--cmp-heading-color:{{ bk_stts.heading_color | default: '#1a1a1a' }}" {{ block.shopify_attributes }}>
                         {%- if bk_stts.heading != blank -%}<p class="t4s-pr-compare-img__heading">{{ bk_stts.heading }}</p>{%- endif -%}
-                        <div class="t4s-pr-compare-img__media t4s_ratio" style="--aspect-ratioapt:{{ cmp_img.aspect_ratio }}">
+                        <div class="t4s-pr-compare-img__media">
+                          {%- comment -%}
+                            Not using the theme's t4s_ratio wrapper here: it absolutely
+                            positions its children against a ::before spacer, which
+                            collapsed this box to zero height. The width and height
+                            attributes below reserve the right space on their own.
+                          {%- endcomment -%}
                           <img class="lazyloadt4s"
                                data-src="{{ cmp_img | image_url: width: 1 }}"
                                data-widths="[320,420,540,640,760,900,1050,1200]"
@@ -626,7 +632,6 @@ t4option0_0 | alt text
                                width="{{ cmp_img.width }}"
                                height="{{ cmp_img.height }}"
                                alt="{{ cmp_img.alt | default: bk_stts.heading | escape }}">
-                          <span class="lazyloadt4s-loader"></span>
                         </div>
                       </div>
                     {%- when 'product_badges' -%}
