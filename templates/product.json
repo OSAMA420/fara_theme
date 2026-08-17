@@ -267,10 +267,17 @@
             "space_v_item_mb": "2"
           }
         },
-        "custom_liquid_ipXwkh": {
-          "type": "custom_liquid",
+        "comparison_image_FXXxHn": {
+          "type": "comparison_image",
           "settings": {
-            "custom_liquid": "<div class=\"fara-mobile-comparison\">\n  <img\n    src=\"https://cdn.shopify.com/s/files/1/0588/7069/4064/files/FARA_chart.png?v=1786627712\"\n    alt=\"FA'RA London vs The Rest\"\n    loading=\"lazy\"\n  >\n</div>\n\n<style>\n  .fara-mobile-comparison {\n    display: none;\n  }\n\n  @media screen and (max-width: 749px) {\n    .fara-mobile-comparison {\n      display: block;\n      width: 100%;\n      margin: 0;\n      padding: 0;\n    }\n\n    .fara-mobile-comparison img {\n      display: block;\n      width: 100%;\n      height: auto;\n      margin: 20px,0,0,0;\n      padding: 0;\n    }\n  }\n</style>"
+            "image": "shopify://shop_images/FARA_chart_deba40ee-8d60-4c7e-96fd-e657b09e9810.png",
+            "heading": "",
+            "visibility": "mobile",
+            "full_width": false,
+            "max_width": 600,
+            "radius": 0,
+            "space": 20,
+            "heading_color": "#1a1a1a"
           }
         },
         "feature_highlights_iqrdWH": {
@@ -351,7 +358,7 @@
         "doran_shoppable_videos_basic_widget_RPJTzF",
         "e8f22b12-b4a8-4a95-b4bc-9a0d2c8075c5",
         "6927e5dd-04a4-4db6-a60c-76fab4d0069a",
-        "custom_liquid_ipXwkh",
+        "comparison_image_FXXxHn",
         "feature_highlights_iqrdWH",
         "custom_liquid_kieHL7",
         "8cb75c19-2a0d-4fb8-9e65-526f24de623b",
