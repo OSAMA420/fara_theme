@@ -77,8 +77,24 @@
           "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {}
         },
+        "product_badges_98ybte": {
+          "type": "product_badges",
+          "settings": {
+            "badge1_icon": "{{ product.metafields.custom.badge1_icon.value }}",
+            "badge1_text": "{{ product.metafields.custom.badge1_text.value }}",
+            "badge2_icon": "{{ product.metafields.custom.badge2_icon.value }}",
+            "badge2_text": "{{ product.metafields.custom.badge2_text.value }}",
+            "badge3_icon": "",
+            "badge3_text": "",
+            "badge_bg": "#ffffff",
+            "badge_border": "#e6e6e6",
+            "badge_text_color": "#1a1a1a",
+            "badge_gap": 10
+          }
+        },
         "custom_liquid_8BfpAH": {
           "type": "custom_liquid",
+          "disabled": true,
           "settings": {
             "custom_liquid": "<img src=\"https://cdn.shopify.com/s/files/1/0588/7069/4064/files/badges_1.png?v=1786627286\" alt=\"Formulated in France, Trending on Insta\" style=\"max-width:100%; margin-top:10px;\""
           }
@@ -322,6 +338,7 @@
         "d5b7b0a4-fb63-44fc-9d84-10e7223a983d",
         "3eaacecf-c956-46e5-84ef-40474509a065",
         "judge_me_reviews_preview_badge_PjVnmd",
+        "product_badges_98ybte",
         "custom_liquid_8BfpAH",
         "meta_bLLzNK",
         "description_P9X3Pp",
