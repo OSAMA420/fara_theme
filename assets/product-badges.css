@@ -33,16 +33,27 @@
 .t4s-product-badge__text{
   white-space: nowrap;
 }
+/* Phones keep the pills on one row instead of stacking. Two badges at the
+   default labels need ~330px and a 375px screen gives 345px. If a label is
+   longer than that the pill shrinks and its text wraps inside, rather than
+   the badge dropping onto its own line. */
 @media (max-width: 767px){
   .t4s-product-badges{
-    gap: var(--pbadge-gap-mb, 8px);
+    flex-wrap: nowrap;
+    gap: var(--pbadge-gap-mb, 6px);
   }
   .t4s-product-badge{
-    padding: 7px 13px 7px 9px;
-    font-size: 13px;
+    flex: 0 1 auto;
+    min-width: 0;
+    gap: 6px;
+    padding: 6px 10px 6px 7px;
+    font-size: 12px;
   }
   .t4s-product-badge__icon{
-    width: 21px;
-    height: 21px;
+    width: 18px;
+    height: 18px;
+  }
+  .t4s-product-badge__text{
+    white-space: normal;
   }
 }
