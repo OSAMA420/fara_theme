@@ -219,37 +219,6 @@
             "advance_pr_list": []
           }
         },
-        "doran_shoppable_videos_basic_widget_RPJTzF": {
-          "type": "shopify://apps/doran-shoppable-videos/blocks/basic-widget/9f421243-1cc3-42c0-8a88-49922de1eacf",
-          "settings": {
-            "widgets": [
-              "01204b30-16de-4404-b626-7e34f005ec97",
-              "8775694b-1c72-46c5-bd95-74a5dc78c156"
-            ],
-            "widget_type": "carousel",
-            "heading": "More Than Just a Fragrance",
-            "heading_tag": "h4",
-            "description": "",
-            "alignment": "center",
-            "is_custom_grid": false,
-            "grid_item_in_desktop": 4,
-            "grid_item_in_tablet": 3,
-            "grid_item_in_mobile": 2,
-            "is_custom_carousel": false,
-            "carousel_item_in_desktop": 4,
-            "carousel_item_in_tablet": 3,
-            "carousel_item_in_mobile": 2
-          }
-        },
-        "e8f22b12-b4a8-4a95-b4bc-9a0d2c8075c5": {
-          "type": "delivery_ask",
-          "settings": {
-            "delivery": true,
-            "page_dr": "shipping-delivery",
-            "ask": true,
-            "phone": true
-          }
-        },
         "6927e5dd-04a4-4db6-a60c-76fab4d0069a": {
           "type": "socials",
           "settings": {
@@ -267,13 +236,44 @@
             "space_v_item_mb": "2"
           }
         },
+        "e8f22b12-b4a8-4a95-b4bc-9a0d2c8075c5": {
+          "type": "delivery_ask",
+          "settings": {
+            "delivery": true,
+            "page_dr": "shipping-delivery",
+            "ask": true,
+            "phone": true
+          }
+        },
+        "doran_shoppable_videos_basic_widget_RPJTzF": {
+          "type": "shopify://apps/doran-shoppable-videos/blocks/basic-widget/9f421243-1cc3-42c0-8a88-49922de1eacf",
+          "settings": {
+            "widgets": [
+              "01204b30-16de-4404-b626-7e34f005ec97",
+              "8775694b-1c72-46c5-bd95-74a5dc78c156"
+            ],
+            "widget_type": "carousel",
+            "heading": "What People Are Saying",
+            "heading_tag": "h4",
+            "description": "",
+            "alignment": "center",
+            "is_custom_grid": false,
+            "grid_item_in_desktop": 4,
+            "grid_item_in_tablet": 3,
+            "grid_item_in_mobile": 2,
+            "is_custom_carousel": false,
+            "carousel_item_in_desktop": 4,
+            "carousel_item_in_tablet": 3,
+            "carousel_item_in_mobile": 2
+          }
+        },
         "comparison_image_FXXxHn": {
           "type": "comparison_image",
           "settings": {
             "image": "shopify://shop_images/FARA_chart_deba40ee-8d60-4c7e-96fd-e657b09e9810.png",
             "heading": "",
             "visibility": "mobile",
-            "full_width": false,
+            "full_width": true,
             "max_width": 600,
             "radius": 0,
             "space": 20,
@@ -355,9 +355,9 @@
         "sold_WgYb8V",
         "live_view_GkpBEf",
         "form_qcmcbq",
-        "doran_shoppable_videos_basic_widget_RPJTzF",
-        "e8f22b12-b4a8-4a95-b4bc-9a0d2c8075c5",
         "6927e5dd-04a4-4db6-a60c-76fab4d0069a",
+        "e8f22b12-b4a8-4a95-b4bc-9a0d2c8075c5",
+        "doran_shoppable_videos_basic_widget_RPJTzF",
         "comparison_image_FXXxHn",
         "feature_highlights_iqrdWH",
         "custom_liquid_kieHL7",
