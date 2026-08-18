@@ -1,0 +1,229 @@
+.t4s-store-net{
+  padding: var(--sn-pad-y, 48px) 0;
+  background: var(--sn-bg, transparent);
+}
+/* Dropped into another section that already owns its spacing. */
+.t4s-store-net.is--bare{
+  padding: 0;
+}
+
+.t4s-store-net__head{
+  text-align: center;
+  margin-bottom: 22px;
+}
+.t4s-store-net__heading{
+  margin: 0 0 8px;
+  font-size: var(--sn-heading-size, 32px);
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--sn-heading-color, #1a1a1a);
+}
+.t4s-store-net__sub{
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--sn-sub-color, #6b6b6b);
+}
+
+/* City filter pills */
+.t4s-store-net__cities{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 20px 0 26px;
+}
+.t4s-store-net__city{
+  appearance: none;
+  border: 1px solid var(--sn-pill-border, #d8d8d8);
+  background: var(--sn-pill-bg, #ffffff);
+  color: var(--sn-pill-text, #1a1a1a);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  padding: 9px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .18s ease, color .18s ease, border-color .18s ease;
+}
+.t4s-store-net__city:hover{
+  border-color: var(--sn-pill-active-bg, #1a1a1a);
+}
+.t4s-store-net__city.is--active{
+  background: var(--sn-pill-active-bg, #1a1a1a);
+  border-color: var(--sn-pill-active-bg, #1a1a1a);
+  color: var(--sn-pill-active-text, #ffffff);
+}
+.t4s-store-net__city.is--static{
+  cursor: default;
+  opacity: .65;
+}
+.t4s-store-net__city.is--static:hover{
+  border-color: var(--sn-pill-border, #d8d8d8);
+}
+
+/* Store cards */
+.t4s-store-net__grid{
+  display: grid;
+  grid-template-columns: repeat(var(--sn-cols, 5), minmax(0, 1fr));
+  gap: var(--sn-gap, 14px);
+}
+.t4s-store-net__card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 18px 12px;
+  border-radius: var(--sn-card-radius, 14px);
+  background: var(--sn-card-bg, #ffffff);
+  border: 1px solid var(--sn-card-border, #e6e6e6);
+  text-align: center;
+  min-height: 148px;
+}
+.t4s-store-net__card.is--hidden{
+  display: none;
+}
+.t4s-store-net__logo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--sn-logo-h, 72px);
+  width: 100%;
+}
+/* Sized by the box, never by the file. With width/height auto, lazysizes
+   chose a source from the rendered width while the rendered width came from
+   that same source, so a logo could never grow past its first small load. */
+.t4s-store-net__logo img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+.t4s-store-net__name{
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--sn-name-color, #1a1a1a);
+}
+.t4s-store-net__card.is--more .t4s-store-net__name{
+  color: var(--sn-sub-color, #6b6b6b);
+}
+.t4s-store-net__empty{
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 26px 0;
+  color: var(--sn-sub-color, #6b6b6b);
+  font-size: 14px;
+}
+
+/* Marquee: one continuous row. The track holds the real group plus
+   enough aria-hidden clones to cover the viewport, and JS measures the group
+   so the shift distance is exact whatever the card count is. */
+.t4s-store-net__marquee{
+  overflow: hidden;
+}
+.t4s-store-net__marquee.is--faded{
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+          mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+.t4s-store-net__track{
+  display: flex;
+  gap: var(--sn-gap, 14px);
+  width: max-content;
+}
+.t4s-store-net__track.is--anim{
+  animation: sn-marquee var(--sn-dur, 30s) linear infinite;
+}
+.t4s-store-net__marquee:hover .t4s-store-net__track.is--pause-hover{
+  animation-play-state: paused;
+}
+.t4s-store-net__group{
+  display: flex;
+  gap: var(--sn-gap, 14px);
+}
+.t4s-store-net__marquee .t4s-store-net__card{
+  flex: 0 0 auto;
+  width: var(--sn-card-w, 170px);
+}
+@keyframes sn-marquee{
+  from{ transform: translateX(0); }
+  to{ transform: translateX(calc(-1 * var(--sn-shift, 0px))); }
+}
+/* Someone who asked for less motion gets a row they can swipe instead. */
+@media (prefers-reduced-motion: reduce){
+  .t4s-store-net__track.is--anim{
+    animation: none;
+  }
+  .t4s-store-net__marquee{
+    overflow-x: auto;
+  }
+}
+
+/* Footer row */
+.t4s-store-net__foot{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 26px;
+}
+.t4s-store-net__link{
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--sn-link-color, #1a1a1a);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.t4s-store-net__trust{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: var(--sn-trust-bg, #e9f6ec);
+  color: var(--sn-trust-text, #1c7a3e);
+  font-size: 14px;
+  font-weight: 600;
+}
+.t4s-store-net__trust svg{
+  width: 17px;
+  height: 17px;
+  flex: 0 0 auto;
+  stroke: currentColor;
+  fill: none;
+}
+
+@media (max-width: 1024px){
+  .t4s-store-net__grid{
+    grid-template-columns: repeat(var(--sn-cols-tb, 3), minmax(0, 1fr));
+  }
+}
+@media (max-width: 767px){
+  .t4s-store-net{
+    padding: var(--sn-pad-y-mb, 34px) 0;
+  }
+  .t4s-store-net__heading{
+    font-size: var(--sn-heading-size-mb, 24px);
+  }
+  .t4s-store-net__sub{
+    font-size: 14px;
+  }
+  .t4s-store-net__grid{
+    grid-template-columns: repeat(var(--sn-cols-mb, 2), minmax(0, 1fr));
+    gap: 10px;
+  }
+  .t4s-store-net__card{
+    min-height: 126px;
+    padding: 14px 10px;
+  }
+  .t4s-store-net__city{
+    font-size: 13px;
+    padding: 8px 14px;
+  }
+  .t4s-store-net__foot{
+    gap: 14px;
+  }
+}

@@ -1,0 +1,474 @@
+<!-- sections/store-network.liquid -->
+{{ 'store-network.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign se_stts = section.settings
+  assign sid = section.id
+  assign stores = section.blocks | where: 'type', 'store'
+
+  comment
+    City pills come from the stores themselves, so adding a store in a new
+    city adds its pill automatically. Liquid has no unique filter here, so
+    the cities are collected into a joined string and de-duplicated by hand.
+  endcomment
+  assign city_list = ''
+  for block in stores
+    assign city = block.settings.city | strip
+    if city == blank
+      continue
+    endif
+    assign probe = '|' | append: city | append: '|'
+    assign haystack = '|' | append: city_list | append: '|'
+    unless haystack contains probe
+      if city_list == blank
+        assign city_list = city
+      else
+        assign city_list = city_list | append: '|' | append: city
+      endif
+    endunless
+  endfor
+  assign cities = city_list | split: '|'
+-%}
+
+{%- if stores.size > 0 -%}
+<div class="t4s-store-net t4s_se_{{ sid }}" data-sn-root data-sn-speed="{{ se_stts.marquee_speed | default: 40 }}" style="--sn-bg:{{ se_stts.bg_color }};--sn-heading-color:{{ se_stts.heading_color }};--sn-sub-color:{{ se_stts.sub_color }};--sn-heading-size:{{ se_stts.heading_size }}px;--sn-heading-size-mb:{{ se_stts.heading_size_mb }}px;--sn-card-bg:{{ se_stts.card_bg }};--sn-card-border:{{ se_stts.card_border }};--sn-card-radius:{{ se_stts.card_radius }}px;--sn-name-color:{{ se_stts.name_color }};--sn-logo-h:{{ se_stts.logo_height }}px;--sn-pill-bg:{{ se_stts.pill_bg }};--sn-pill-border:{{ se_stts.pill_border }};--sn-pill-text:{{ se_stts.pill_text }};--sn-pill-active-bg:{{ se_stts.pill_active_bg }};--sn-pill-active-text:{{ se_stts.pill_active_text }};--sn-trust-bg:{{ se_stts.trust_bg }};--sn-trust-text:{{ se_stts.trust_text_color }};--sn-link-color:{{ se_stts.link_color }};--sn-cols:{{ se_stts.cols }};--sn-cols-tb:{{ se_stts.cols_tb }};--sn-cols-mb:{{ se_stts.cols_mb }};--sn-gap:{{ se_stts.gap }}px;--sn-pad-y:{{ se_stts.pad_y }}px;--sn-pad-y-mb:{{ se_stts.pad_y_mb }}px;--sn-card-w:{{ se_stts.card_width | default: 170 }}px">
+  <div class="t4s-container">
+
+    <div class="t4s-store-net__head">
+      {%- if se_stts.heading != blank -%}
+        <h2 class="t4s-store-net__heading">{{ se_stts.heading }}</h2>
+      {%- endif -%}
+      {%- if se_stts.subheading != blank -%}
+        <p class="t4s-store-net__sub">{{ se_stts.subheading }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- if se_stts.show_filter and cities.size > 0 -%}
+      <div class="t4s-store-net__cities" data-store-net-filter>
+        <button type="button" class="t4s-store-net__city is--active" data-city="__all">{{ se_stts.all_label }}</button>
+        {%- for city in cities -%}
+          <button type="button" class="t4s-store-net__city" data-city="{{ city | downcase | escape }}">{{ city }}</button>
+        {%- endfor -%}
+        {%- if se_stts.more_cities_label != blank -%}
+          <span class="t4s-store-net__city is--static">{{ se_stts.more_cities_label }}</span>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- capture store_cards -%}
+      {%- for block in stores -%}
+        {%- liquid
+          assign logo = block.settings.logo
+          assign name = block.settings.name
+          assign city = block.settings.city | strip
+        -%}
+        {%- if logo == blank and name == blank -%}{% continue %}{% endif -%}
+        <div class="t4s-store-net__card" data-city="{{ city | downcase | escape }}" {{ block.shopify_attributes }}>
+          {%- if logo != blank -%}
+            <span class="t4s-store-net__logo">
+              <img class="lazyloadt4s"
+                   data-src="{{ logo | image_url: width: 1 }}"
+                   data-widths="[80,120,160,200,260,320,400,500]"
+                   data-optimumx="2"
+                   data-sizes="auto"
+                   src="{% render 'img_svg', w: logo.width, h: logo.height %}"
+                   width="{{ logo.width }}"
+                   height="{{ logo.height }}"
+                   alt="{{ logo.alt | default: name | escape }}">
+            </span>
+          {%- endif -%}
+          {%- if name != blank -%}<span class="t4s-store-net__name">{{ name }}</span>{%- endif -%}
+        </div>
+      {%- endfor -%}
+
+      {%- if se_stts.more_stores_label != blank -%}
+        <div class="t4s-store-net__card is--more" data-city="__all">
+          <span class="t4s-store-net__name">{{ se_stts.more_stores_label }}</span>
+        </div>
+      {%- endif -%}
+    {%- endcapture -%}
+
+    {%- if se_stts.layout == 'marquee' -%}
+      <div class="t4s-store-net__marquee{% if se_stts.fade_edges %} is--faded{% endif %}" data-sn-marquee>
+        <div class="t4s-store-net__track{% if se_stts.marquee_pause %} is--pause-hover{% endif %}" data-sn-track>
+          <div class="t4s-store-net__group" data-sn-group>{{ store_cards }}</div>
+        </div>
+      </div>
+      <p class="t4s-store-net__empty" data-store-net-empty hidden>{{ se_stts.empty_text }}</p>
+    {%- else -%}
+      <div class="t4s-store-net__grid" data-store-net-grid>
+        {{ store_cards }}
+        <p class="t4s-store-net__empty" data-store-net-empty hidden>{{ se_stts.empty_text }}</p>
+      </div>
+    {%- endif -%}
+
+    {%- if se_stts.link_label != blank or se_stts.trust_text != blank -%}
+      <div class="t4s-store-net__foot">
+        {%- if se_stts.link_label != blank -%}
+          <a class="t4s-store-net__link" href="{{ se_stts.link_url | default: '#' }}">{{ se_stts.link_label }}</a>
+        {%- endif -%}
+        {%- if se_stts.trust_text != blank -%}
+          <span class="t4s-store-net__trust">
+            <svg viewBox="0 0 24 24" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6.5 9.6 17 4 11.5"></path></svg>
+            {{ se_stts.trust_text }}
+          </span>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+  </div>
+</div>
+
+<script src="{{ 'store-network.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Store network",
+  "tag": "section",
+  "class": "t4s-section t4s-section-all",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Shows the stores that stock your products, with city buttons that filter the grid. Add one block per store and give each a city — the city buttons build themselves from those values."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Available at 50+ stores nationwide"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Karachi · Lahore · Islamabad · Faisalabad + 46 more cities"
+    },
+    {
+      "type": "header",
+      "content": "+ City filter"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_filter",
+      "label": "Show city buttons",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "all_label",
+      "label": "All button label",
+      "default": "All"
+    },
+    {
+      "type": "text",
+      "id": "more_cities_label",
+      "label": "Extra cities label",
+      "info": "Shown as a plain, unclickable pill at the end. Leave blank to hide.",
+      "default": "+46 more"
+    },
+    {
+      "type": "text",
+      "id": "more_stores_label",
+      "label": "Extra stores card",
+      "info": "A last card for the stores you have not listed. Leave blank to hide.",
+      "default": "+ 44 more"
+    },
+    {
+      "type": "text",
+      "id": "empty_text",
+      "label": "Text when a city has no stores",
+      "default": "No stores listed for this city yet."
+    },
+    {
+      "type": "header",
+      "content": "+ Bottom row"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "Find nearest store"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link"
+    },
+    {
+      "type": "text",
+      "id": "trust_text",
+      "label": "Trust badge text",
+      "default": "50,000+ happy customers"
+    },
+    {
+      "type": "header",
+      "content": "+ Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "default": "marquee",
+      "options": [
+        { "value": "marquee", "label": "Moving row" },
+        { "value": "grid", "label": "Grid" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "marquee_speed",
+      "label": "Moving row speed",
+      "info": "Pixels per second. Lower is slower.",
+      "min": 10,
+      "max": 120,
+      "step": 5,
+      "default": 40
+    },
+    {
+      "type": "checkbox",
+      "id": "marquee_pause",
+      "label": "Pause when hovered",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "fade_edges",
+      "label": "Fade the left and right edges",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "card_width",
+      "label": "Card width (moving row)",
+      "min": 110,
+      "max": 280,
+      "step": 10,
+      "unit": "px",
+      "default": 170
+    },
+    {
+      "type": "range",
+      "id": "cols",
+      "label": "Columns (desktop)",
+      "min": 3,
+      "max": 8,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "cols_tb",
+      "label": "Columns (tablet)",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "cols_mb",
+      "label": "Columns (mobile)",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Space between cards",
+      "min": 6,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "label": "Logo height",
+      "min": 32,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Card corner radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size (desktop)",
+      "min": 20,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mb",
+      "label": "Heading size (mobile)",
+      "min": 16,
+      "max": 34,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "pad_y",
+      "label": "Space above and below (desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "pad_y_mb",
+      "label": "Space above and below (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 34
+    },
+    {
+      "type": "header",
+      "content": "+ Colours"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "sub_color",
+      "label": "Subheading",
+      "default": "#6b6b6b"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card background",
+      "info": "Keep this light if your store logos were made for white backgrounds.",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_border",
+      "label": "Card border",
+      "default": "#e6e6e6"
+    },
+    {
+      "type": "color",
+      "id": "name_color",
+      "label": "Store name",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "pill_bg",
+      "label": "City button background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "pill_border",
+      "label": "City button border",
+      "default": "#d8d8d8"
+    },
+    {
+      "type": "color",
+      "id": "pill_text",
+      "label": "City button text",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "pill_active_bg",
+      "label": "City button background (selected)",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "pill_active_text",
+      "label": "City button text (selected)",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "trust_bg",
+      "label": "Trust badge background",
+      "default": "#e9f6ec"
+    },
+    {
+      "type": "color",
+      "id": "trust_text_color",
+      "label": "Trust badge text",
+      "default": "#1c7a3e"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "store",
+      "name": "Store",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Store name"
+        },
+        {
+          "type": "text",
+          "id": "city",
+          "label": "City",
+          "info": "Used by the city buttons. Spell it the same way across stores in the same city."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Store network",
+      "category": "Storefront",
+      "blocks": [
+        { "type": "store" },
+        { "type": "store" },
+        { "type": "store" },
+        { "type": "store" },
+        { "type": "store" }
+      ]
+    }
+  ]
+}
+{% endschema %}

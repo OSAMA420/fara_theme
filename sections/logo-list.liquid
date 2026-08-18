@@ -45,6 +45,44 @@
     {%- if stt_layout == 't4s-se-container' -%}
       <div class="t4s-container-inner{% if stt_image_bg != blank %} t4s-has-imgbg lazyloadt4s{% endif %}" {% if stt_image_bg != blank %} data-bgset="{{ stt_image_bg | image_url: width: 1 }}" data-sizes="auto"  data-optimumx="1.5"{% endif %}>{% endif -%}
     {%- render 'section_tophead', se_stts: se_stts, get_height: true -%}
+    {%- if se_stts.layout_des == "4" -%}
+    {{ 'store-network.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'store-network.js' | asset_url }}" defer="defer"></script>
+    <div class="t4s-store-net is--bare t4s_se_{{ sid }}" data-sn-root data-sn-speed="{{ se_stts.marquee_speed | default: 40 }}" style="--sn-card-bg:{{ se_stts.card_bg }};--sn-card-border:{{ se_stts.card_border }};--sn-card-radius:{{ se_stts.card_radius }}px;--sn-logo-h:{{ se_stts.logo_height }}px;--sn-gap:{{ se_stts.card_gap }}px;--sn-card-w:{{ se_stts.card_width }}px">
+      {%- capture logo_cards -%}
+        {%- for block in se_blocks -%}
+          {%- liquid
+            assign bk_stts = block.settings
+            assign image = bk_stts.image
+            assign url = bk_stts.url
+          -%}
+          {%- if image == blank -%}{% continue %}{% endif -%}
+          {%- if url != blank -%}
+            <a href="{{ url }}" target="{{ open_link }}" class="t4s-store-net__card" {{ block.shopify_attributes }}>
+          {%- else -%}
+            <div class="t4s-store-net__card" {{ block.shopify_attributes }}>
+          {%- endif -%}
+              <span class="t4s-store-net__logo">
+                <img class="lazyloadt4s"
+                     data-src="{{ image | image_url: width: 1 }}"
+                     data-widths="[80,120,160,200,260,320,400,500]"
+                     data-optimumx="2"
+                     data-sizes="auto"
+                     src="{% render 'img_svg', w: image.width, h: image.height %}"
+                     width="{{ image.width }}"
+                     height="{{ image.height }}"
+                     alt="{{ image.alt | escape }}">
+              </span>
+          {%- if url != blank -%}</a>{%- else -%}</div>{%- endif -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+      <div class="t4s-store-net__marquee{% if se_stts.fade_edges %} is--faded{% endif %}" data-sn-marquee>
+        <div class="t4s-store-net__track{% if se_stts.marquee_pause %} is--pause-hover{% endif %}" data-sn-track>
+          <div class="t4s-store-net__group" data-sn-group>{{ logo_cards }}</div>
+        </div>
+      </div>
+    </div>
+    {%- else -%}
     {%- if se_stts.layout_des == "1" -%}
         <div {{ click_image }} data-t4s-thumb-{{ nav_thumbs }} class="t4s_ratioadapt t4s-align-items-center t4s-row t4s-row-cols-lg-{{ se_stts.col_dk }} t4s-row-cols-md-{{ se_stts.col_tb }} t4s-row-cols-{{ se_stts.col_mb }} t4s-gx-lg-{{ se_stts.space_item }} t4s-gy-lg-{{ se_stts.space_item }} t4s-gx-md-{{ se_stts.space_item_tb }} t4s-gy-md-{{ se_stts.space_item_tb }} t4s-gx-{{ se_stts.space_item_mb }} t4s-gy-{{ se_stts.space_item_mb }} t4s-logo__border-{{ enable_border }}" id="b_{{ block.id }}" data-select-flickity {{ block.shopify_attributes }}>
     {%- elsif se_stts.layout_des == "2" -%}
@@ -78,6 +116,7 @@
             {%- endfor -%}
         {%- endif -%}
     </div>
+    {%- endif -%}
     {{- html_layout[1] -}}
 </div>
 {%- style -%}
@@ -251,6 +290,10 @@
                 {
                     "value": "3",
                     "label": "Packery"
+                },
+                {
+                    "value": "4",
+                    "label": "Cards + moving row"
                 }
             ],
             "label": "Layout design",
@@ -279,6 +322,84 @@
             "label": "Enable thumbnail",
             "info": "Works when use popup thumbnail",
             "default": true
+        },
+        {
+            "type": "header",
+            "content": "+ Cards + moving row options"
+        },
+        {
+            "type": "range",
+            "id": "marquee_speed",
+            "label": "Moving row speed",
+            "info": "Pixels per second. Lower is slower.",
+            "min": 10,
+            "max": 120,
+            "step": 5,
+            "default": 40
+        },
+        {
+            "type": "checkbox",
+            "id": "marquee_pause",
+            "label": "Pause when hovered",
+            "default": true
+        },
+        {
+            "type": "checkbox",
+            "id": "fade_edges",
+            "label": "Fade the left and right edges",
+            "default": true
+        },
+        {
+            "type": "range",
+            "id": "card_width",
+            "label": "Card width",
+            "min": 110,
+            "max": 280,
+            "step": 10,
+            "unit": "px",
+            "default": 170
+        },
+        {
+            "type": "range",
+            "id": "card_gap",
+            "label": "Space between cards",
+            "min": 6,
+            "max": 30,
+            "step": 2,
+            "unit": "px",
+            "default": 14
+        },
+        {
+            "type": "range",
+            "id": "logo_height",
+            "label": "Logo height",
+            "min": 32,
+            "max": 120,
+            "step": 2,
+            "unit": "px",
+            "default": 72
+        },
+        {
+            "type": "range",
+            "id": "card_radius",
+            "label": "Card corner radius",
+            "min": 0,
+            "max": 24,
+            "step": 2,
+            "unit": "px",
+            "default": 14
+        },
+        {
+            "type": "color",
+            "id": "card_bg",
+            "label": "Card background",
+            "default": "#ffffff"
+        },
+        {
+            "type": "color",
+            "id": "card_border",
+            "label": "Card border",
+            "default": "#e6e6e6"
         },
         {
             "type": "checkbox",
