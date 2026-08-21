@@ -2551,21 +2551,17 @@ t4option0_0 | alt text
           "default": 16
         },
         {
-          "type": "range",
+          "type": "number",
           "id": "space_top",
-          "label": "Space above",
-          "info": "Go negative to pull the bar closer to Add to cart. The block above already leaves a 20px gap of its own.",
-          "min": -30,
-          "max": 40,
-          "step": 2,
-          "unit": "px",
+          "label": "Space above (px)",
+          "info": "Type a negative number such as -12 to pull the bar closer to the button above, which already leaves a 20px gap of its own. -20 closes it completely. A slider cannot take negatives, which is why this is a typed field.",
           "default": 0
         },
         {
           "type": "range",
           "id": "space_bottom",
           "label": "Space below",
-          "min": -30,
+          "min": 0,
           "max": 40,
           "step": 2,
           "unit": "px",
