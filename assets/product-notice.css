@@ -1,5 +1,8 @@
 .t4s-pr-notice{
-  margin: var(--nt-space, 12px) 0;
+  /* Separate top and bottom, and the top may go negative: the block above
+     already carries a 20px bottom margin and margins collapse, so pulling up
+     is the only way to close that gap. */
+  margin: var(--nt-space-top, 0px) 0 var(--nt-space-bottom, 12px);
   padding: var(--nt-pad-y, 12px) var(--nt-pad-x, 16px);
   border-radius: var(--nt-radius, 10px);
   background: var(--nt-bg, #c9c9c9);

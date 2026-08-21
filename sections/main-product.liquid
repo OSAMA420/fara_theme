@@ -617,7 +617,7 @@ t4option0_0 | alt text
                           assign nt_class = ' is--desktop-only'
                         endif
                       -%}
-                      <div class="t4s-pr-notice{{ nt_class }}" style="--nt-bg:{{ bk_stts.bg_color | default: '#c9c9c9' }};--nt-text:{{ bk_stts.text_color | default: '#1a1a1a' }};--nt-radius:{{ bk_stts.radius | default: 10 }}px;--nt-align:{{ bk_stts.align | default: 'center' }};--nt-space:{{ bk_stts.space | default: 12 }}px;--nt-pad-y:{{ bk_stts.pad_y | default: 12 }}px;--nt-pad-x:{{ bk_stts.pad_x | default: 16 }}px;--nt-size:{{ bk_stts.size | default: 15 }}px;--nt-size-sub:{{ bk_stts.size_sub | default: 14 }}px" {{ block.shopify_attributes }}>
+                      <div class="t4s-pr-notice{{ nt_class }}" style="--nt-bg:{{ bk_stts.bg_color | default: '#c9c9c9' }};--nt-text:{{ bk_stts.text_color | default: '#1a1a1a' }};--nt-radius:{{ bk_stts.radius | default: 10 }}px;--nt-align:{{ bk_stts.align | default: 'center' }};--nt-space-top:{{ bk_stts.space_top | default: 0 }}px;--nt-space-bottom:{{ bk_stts.space_bottom | default: 12 }}px;--nt-pad-y:{{ bk_stts.pad_y | default: 12 }}px;--nt-pad-x:{{ bk_stts.pad_x | default: 16 }}px;--nt-size:{{ bk_stts.size | default: 15 }}px;--nt-size-sub:{{ bk_stts.size_sub | default: 14 }}px" {{ block.shopify_attributes }}>
                         {%- comment -%}
                           dir="auto" lets an Urdu line lay itself out right to left while
                           an English line beside it stays left to right.
@@ -2552,9 +2552,20 @@ t4option0_0 | alt text
         },
         {
           "type": "range",
-          "id": "space",
-          "label": "Space above and below",
-          "min": 0,
+          "id": "space_top",
+          "label": "Space above",
+          "info": "Go negative to pull the bar closer to Add to cart. The block above already leaves a 20px gap of its own.",
+          "min": -30,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "space_bottom",
+          "label": "Space below",
+          "min": -30,
           "max": 40,
           "step": 2,
           "unit": "px",
