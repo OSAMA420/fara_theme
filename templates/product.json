@@ -86,17 +86,10 @@
             "badge2_text": "{{ product.metafields.custom.badge2_text.value }}",
             "badge3_icon": "",
             "badge3_text": "",
-            "badge_bg": "#ffffff",
+            "badge_bg": "#FFFFFF",
             "badge_border": "#e6e6e6",
             "badge_text_color": "#1a1a1a",
             "badge_gap": 10
-          }
-        },
-        "custom_liquid_8BfpAH": {
-          "type": "custom_liquid",
-          "disabled": true,
-          "settings": {
-            "custom_liquid": "<img src=\"https://cdn.shopify.com/s/files/1/0588/7069/4064/files/badges_1.png?v=1786627286\" alt=\"Formulated in France, Trending on Insta\" style=\"max-width:100%; margin-top:10px;\""
           }
         },
         "meta_bLLzNK": {
@@ -148,16 +141,8 @@
             "space_tb_mb": 10
           }
         },
-        "custom_liquid_7ehwiC": {
-          "type": "custom_liquid",
-          "disabled": true,
-          "settings": {
-            "custom_liquid": "{% render 'scent-intensity-profile' %}"
-          }
-        },
         "sold_WgYb8V": {
           "type": "sold",
-          "disabled": true,
           "settings": {
             "icon": "default",
             "icon_name": "lab la-gripfire",
@@ -171,7 +156,6 @@
         },
         "live_view_GkpBEf": {
           "type": "live_view",
-          "disabled": true,
           "settings": {
             "icon": "default",
             "icon_name": "las la-eye",
@@ -250,17 +234,18 @@
           "settings": {
             "widgets": [
               "01204b30-16de-4404-b626-7e34f005ec97",
-              "8775694b-1c72-46c5-bd95-74a5dc78c156"
+              "8775694b-1c72-46c5-bd95-74a5dc78c156",
+              "c4625603-fd9d-47f5-84dc-ff0c52d9f624"
             ],
             "widget_type": "carousel",
             "heading": "What People Are Saying",
             "heading_tag": "h4",
             "description": "",
             "alignment": "center",
-            "is_custom_grid": false,
+            "is_custom_grid": true,
             "grid_item_in_desktop": 4,
             "grid_item_in_tablet": 3,
-            "grid_item_in_mobile": 2,
+            "grid_item_in_mobile": 3,
             "is_custom_carousel": false,
             "carousel_item_in_desktop": 4,
             "carousel_item_in_tablet": 3,
@@ -346,12 +331,10 @@
         "3eaacecf-c956-46e5-84ef-40474509a065",
         "judge_me_reviews_preview_badge_PjVnmd",
         "product_badges_98ybte",
-        "custom_liquid_8BfpAH",
         "meta_bLLzNK",
         "description_P9X3Pp",
         "18a8b200-4f94-4b72-b0eb-01abf185ecb3",
         "49fc91c0-8308-4d0f-90f1-cfe6c5d8ea04",
-        "custom_liquid_7ehwiC",
         "sold_WgYb8V",
         "live_view_GkpBEf",
         "form_qcmcbq",

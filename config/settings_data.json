@@ -89,7 +89,7 @@
           "announcement-bar-1": {
             "type": "announcement",
             "settings": {
-              "content": "<p>Free Shipping! Order 3,950+ & enjoy free delivery [icon_arrow]<br/><br/></p>",
+              "content": "<p>Free Shipping! Order 3,999+ & enjoy free delivery [icon_arrow]<br/><br/></p>",
               "icons_op": "1",
               "icon_awesome": "las la-shipping-fast",
               "btn_link_layout": "2",
@@ -167,27 +167,6 @@
               "cl_cd": "#ffffff",
               "dayx": 0
             }
-          },
-          "announcement_PKfq3R": {
-            "type": "announcement",
-            "disabled": true,
-            "settings": {
-              "content": "<p>Today deal sale off 70%. End in [countdown]. Hurry Up!! [icon_arrow]</p>",
-              "icons_op": "0",
-              "icon_awesome": "las la-home",
-              "btn_link_layout": "2",
-              "cl_btn": "#ffffff",
-              "bg_btn": "#000000",
-              "countdown": "2023/12/26",
-              "cd_layout": "1",
-              "txt_day": "days",
-              "txt_h": "h",
-              "txt_m": "m",
-              "txt_s": "s",
-              "bg_cd": "#d51919",
-              "cl_cd": "#ffffff",
-              "dayx": 0
-            }
           }
         },
         "block_order": [
@@ -195,8 +174,7 @@
           "announcement-bar-1",
           "announcement-bar-0",
           "announcement_Lm3by4",
-          "announcement_aHCL3A",
-          "announcement_PKfq3R"
+          "announcement_aHCL3A"
         ],
         "settings": {
           "show_announcement": true,
@@ -1553,7 +1531,7 @@
             "type": "sales",
             "settings": {
               "product_list": [
-                "red-gold-long-leather-clutch"
+                "imperial-vanilla"
               ],
               "mb": false,
               "index": true,
@@ -1572,7 +1550,7 @@
               "close": "Close",
               "enable_qv": true,
               "enable_progressbar": true,
-              "list_user": "Nathan (California) | Alex (Texas) | Henry (New York) | Kiti (Ohio) | Daniel (Washington) | Hau (California) | Van (Ohio) | Sara (Montana)  | Kate (Georgia)",
+              "list_user": "Someone (Karachi) |",
               "enable_time": true,
               "list_time": "4 hours ago | 2 hours ago | 45 minutes ago | 1 day ago | 8 hours ago | 10 hours ago | 25 minutes ago | 2 day ago | 5 hours ago | 40 minutes ago",
               "enable_verify": true,

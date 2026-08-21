@@ -14,6 +14,7 @@
       "blocks": {
         "image_parent_VNAfmx": {
           "type": "image_parent",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/ChatGPT_Image_Aug_5_2026_05_33_24_PM.png",
             "image_mb": "shopify://shop_images/Azaadi_banner.png",
@@ -98,7 +99,6 @@
         },
         "image_parent_fPdBcG": {
           "type": "image_parent",
-          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Header_v3_1.webp",
             "image_mb": "shopify://shop_images/Mobile_header_v3.webp",
@@ -505,6 +505,7 @@
     },
     "featured_collection_wJRm3K": {
       "type": "featured-collection",
+      "disabled": true,
       "name": "Featured collection",
       "settings": {
         "design_heading": "5",
@@ -2609,7 +2610,7 @@
       "settings": {
         "design_heading": "5",
         "heading_center": true,
-        "top_heading": "50+ Stores",
+        "top_heading": "Available at 50+ Stores nationwide",
         "top_subheading": "",
         "tophead_mb": 19,
         "tophead_mb_tb": 30,
@@ -2617,9 +2618,18 @@
         "img_effect": "none",
         "b_effect": "none",
         "open_link": "_blank",
-        "layout_des": "2",
+        "layout_des": "4",
         "click_image": "data-goto",
         "nav_thumbs": true,
+        "marquee_speed": 40,
+        "marquee_pause": true,
+        "fade_edges": true,
+        "card_width": 150,
+        "card_gap": 14,
+        "logo_height": 120,
+        "card_radius": 14,
+        "card_bg": "#ffffff",
+        "card_border": "#e6e6e6",
         "enable_border": false,
         "col_dk": "6",
         "col_tb": "2",
