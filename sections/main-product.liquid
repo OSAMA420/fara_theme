@@ -597,6 +597,34 @@ t4option0_0 | alt text
                           {% endif %}
                         </div>
                       {%- endif -%}
+                    {%- when 'notice' -%}
+                      {%- liquid
+                        assign nt_main = bk_stts.text
+                        assign nt_sub = bk_stts.subtext
+                        comment
+                          Blank on this product means nothing to say, so the bar stays
+                          off. Bind the text to a product metafield and leave it empty
+                          here to pick which products show it.
+                        endcomment
+                        if nt_main == blank and nt_sub == blank
+                          continue
+                        endif
+                        echo 'product-notice.css' | asset_url | stylesheet_tag
+                        assign nt_class = ''
+                        if bk_stts.visibility == 'mobile'
+                          assign nt_class = ' is--mobile-only'
+                        elsif bk_stts.visibility == 'desktop'
+                          assign nt_class = ' is--desktop-only'
+                        endif
+                      -%}
+                      <div class="t4s-pr-notice{{ nt_class }}" style="--nt-bg:{{ bk_stts.bg_color | default: '#c9c9c9' }};--nt-text:{{ bk_stts.text_color | default: '#1a1a1a' }};--nt-radius:{{ bk_stts.radius | default: 10 }}px;--nt-align:{{ bk_stts.align | default: 'center' }};--nt-space:{{ bk_stts.space | default: 12 }}px;--nt-pad-y:{{ bk_stts.pad_y | default: 12 }}px;--nt-pad-x:{{ bk_stts.pad_x | default: 16 }}px;--nt-size:{{ bk_stts.size | default: 15 }}px;--nt-size-sub:{{ bk_stts.size_sub | default: 14 }}px" {{ block.shopify_attributes }}>
+                        {%- comment -%}
+                          dir="auto" lets an Urdu line lay itself out right to left while
+                          an English line beside it stays left to right.
+                        {%- endcomment -%}
+                        {%- if nt_main != blank -%}<div class="t4s-pr-notice__main" dir="auto">{{ nt_main }}</div>{%- endif -%}
+                        {%- if nt_sub != blank -%}<div class="t4s-pr-notice__sub" dir="auto">{{ nt_sub }}</div>{%- endif -%}
+                      </div>
                     {%- when 'comparison_image' -%}
                       {%- liquid
                         assign cmp_img = bk_stts.image
@@ -2406,6 +2434,131 @@ t4option0_0 | alt text
           "id": "readl_txt",
           "label": "Read less label",
           "default": "Read less"
+        }
+      ]
+    },
+    {
+      "type": "notice",
+      "name": "Notice bar",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "A coloured bar for a short message, such as an open-parcel or check-before-pay note. Drag it below the product form to sit under Add to cart. It stays hidden on products where both text fields are empty, so connect them to product metafields (Settings > Custom data > Products) with the dynamic source icon and leave them blank here to choose which products show it."
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Open Parcel — Check Before Pay</p>"
+        },
+        {
+          "type": "richtext",
+          "id": "subtext",
+          "label": "Second line",
+          "info": "Optional, shown smaller under the first line. Urdu and English each lay themselves out the right way round."
+        },
+        {
+          "type": "select",
+          "id": "visibility",
+          "label": "Show on",
+          "default": "all",
+          "options": [
+            { "value": "all", "label": "All devices" },
+            { "value": "mobile", "label": "Mobile only" },
+            { "value": "desktop", "label": "Desktop only" }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "+ Colours"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background",
+          "default": "#c9c9c9"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text",
+          "default": "#1a1a1a"
+        },
+        {
+          "type": "header",
+          "content": "+ Layout"
+        },
+        {
+          "type": "select",
+          "id": "align",
+          "label": "Text alignment",
+          "default": "center",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "right", "label": "Right" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "size",
+          "label": "Text size",
+          "min": 11,
+          "max": 22,
+          "step": 1,
+          "unit": "px",
+          "default": 15
+        },
+        {
+          "type": "range",
+          "id": "size_sub",
+          "label": "Second line size",
+          "min": 10,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "radius",
+          "label": "Corner radius",
+          "min": 0,
+          "max": 30,
+          "step": 2,
+          "unit": "px",
+          "default": 10
+        },
+        {
+          "type": "range",
+          "id": "pad_y",
+          "label": "Padding top and bottom",
+          "min": 4,
+          "max": 30,
+          "step": 2,
+          "unit": "px",
+          "default": 12
+        },
+        {
+          "type": "range",
+          "id": "pad_x",
+          "label": "Padding left and right",
+          "min": 4,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "space",
+          "label": "Space above and below",
+          "min": 0,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 12
         }
       ]
     },
