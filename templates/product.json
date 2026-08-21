@@ -86,7 +86,7 @@
             "badge2_text": "{{ product.metafields.custom.badge2_text.value }}",
             "badge3_icon": "",
             "badge3_text": "",
-            "badge_bg": "#FFFFFF",
+            "badge_bg": "#ffffff",
             "badge_border": "#e6e6e6",
             "badge_text_color": "#1a1a1a",
             "badge_gap": 10
@@ -201,6 +201,23 @@
             "qty_val": "1",
             "advance_label": "Choose style",
             "advance_pr_list": []
+          }
+        },
+        "notice_zd3XQC": {
+          "type": "notice",
+          "settings": {
+            "text": "<p>Open Parcel — Check Before Pay</p>",
+            "subtext": "",
+            "visibility": "all",
+            "bg_color": "#c9c9c9",
+            "text_color": "#1a1a1a",
+            "align": "center",
+            "size": 15,
+            "size_sub": 14,
+            "radius": 20,
+            "pad_y": 12,
+            "pad_x": 16,
+            "space": 12
           }
         },
         "6927e5dd-04a4-4db6-a60c-76fab4d0069a": {
@@ -338,6 +355,7 @@
         "sold_WgYb8V",
         "live_view_GkpBEf",
         "form_qcmcbq",
+        "notice_zd3XQC",
         "6927e5dd-04a4-4db6-a60c-76fab4d0069a",
         "e8f22b12-b4a8-4a95-b4bc-9a0d2c8075c5",
         "doran_shoppable_videos_basic_widget_RPJTzF",
