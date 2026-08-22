@@ -64,13 +64,35 @@
 @media (min-width: 768px){
   .t4s-pr-proof.is--mobile-only{ display: none; }
 }
+/* Phones keep everything on one line. If the wording is still too long for
+   the screen the pill scrolls inside itself rather than pushing the page
+   sideways, so the layout never breaks. */
 @media (max-width: 767px){
   .t4s-pr-proof.is--desktop-only{ display: none; }
   .t4s-pr-proof{
-    gap: 8px;
-    padding: var(--sp-pad-y-mb, 6px) var(--sp-pad-x-mb, 11px);
+    flex-wrap: nowrap;
+    gap: 7px;
+    padding: var(--sp-pad-y-mb, 6px) var(--sp-pad-x-mb, 10px);
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .t4s-pr-proof::-webkit-scrollbar{ display: none; }
+  .t4s-pr-proof__avatars img{
+    width: var(--sp-avatar-mb, 24px);
+    height: var(--sp-avatar-mb, 24px);
+  }
+  .t4s-pr-proof__avatars img + img{
+    margin-left: calc(var(--sp-avatar-mb, 24px) * -0.34);
   }
   .t4s-pr-proof__body{
-    font-size: var(--sp-size-mb, 12px);
+    flex-wrap: nowrap;
+    gap: 4px;
+    font-size: var(--sp-size-mb, 11px);
+  }
+  .t4s-pr-proof__names,
+  .t4s-pr-proof__msg,
+  .t4s-pr-proof__msg p{
+    white-space: nowrap;
   }
 }

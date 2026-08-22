@@ -624,7 +624,7 @@ t4option0_0 | alt text
                         assign sp_av = bk_stts.avatar_size | default: 30
                         assign sp_av2x = sp_av | times: 2
                       -%}
-                      <div class="t4s-pr-proof{{ sp_class }}" style="--sp-bg:{{ bk_stts.bg_color | default: '#fbeaef' }};--sp-text:{{ bk_stts.text_color | default: '#1a1a1a' }};--sp-ring:{{ bk_stts.ring_color | default: '#ffffff' }};--sp-avatar:{{ sp_av }}px;--sp-size:{{ bk_stts.size | default: 13 }}px;--sp-radius:{{ bk_stts.radius | default: 999 }}px;--sp-pad-y:{{ bk_stts.pad_y | default: 7 }}px;--sp-pad-x:{{ bk_stts.pad_x | default: 14 }}px;--sp-space-top:{{ bk_stts.space_top | default: 0 }}px;--sp-space-bottom:{{ bk_stts.space_bottom | default: 12 }}px;--sp-tick:{{ bk_stts.tick_size | default: 15 }}px" {{ block.shopify_attributes }}>
+                      <div class="t4s-pr-proof{{ sp_class }}" style="--sp-bg:{{ bk_stts.bg_color | default: '#fbeaef' }};--sp-text:{{ bk_stts.text_color | default: '#1a1a1a' }};--sp-ring:{{ bk_stts.ring_color | default: '#ffffff' }};--sp-avatar:{{ sp_av }}px;--sp-size:{{ bk_stts.size | default: 13 }}px;--sp-radius:{{ bk_stts.radius | default: 999 }}px;--sp-pad-y:{{ bk_stts.pad_y | default: 7 }}px;--sp-pad-x:{{ bk_stts.pad_x | default: 14 }}px;--sp-space-top:{{ bk_stts.space_top | default: 0 }}px;--sp-space-bottom:{{ bk_stts.space_bottom | default: 12 }}px;--sp-tick:{{ bk_stts.tick_size | default: 15 }}px;--sp-size-mb:{{ bk_stts.size_mb | default: 11 }}px;--sp-avatar-mb:{{ bk_stts.avatar_size_mb | default: 24 }}px" {{ block.shopify_attributes }}>
                         {%- liquid
                           assign has_avatar = false
                           for i in (1..3)
@@ -2647,6 +2647,26 @@ t4option0_0 | alt text
           "step": 1,
           "unit": "px",
           "default": 13
+        },
+        {
+          "type": "range",
+          "id": "size_mb",
+          "label": "Text size (mobile)",
+          "min": 8,
+          "max": 16,
+          "step": 1,
+          "unit": "px",
+          "default": 11
+        },
+        {
+          "type": "range",
+          "id": "avatar_size_mb",
+          "label": "Face size (mobile)",
+          "min": 16,
+          "max": 44,
+          "step": 2,
+          "unit": "px",
+          "default": 24
         },
         {
           "type": "range",
