@@ -1,0 +1,6 @@
+# Shopify product/customer exports. These are data, not theme files, and can
+# carry SKUs, cost and inventory, so they stay out of the repo.
+*.csv
+
+# Local editor and tooling state
+.claude/

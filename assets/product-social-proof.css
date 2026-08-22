@@ -1,0 +1,76 @@
+.t4s-pr-proof{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: fit-content;
+  max-width: 100%;
+  margin: var(--sp-space-top, 0px) 0 var(--sp-space-bottom, 12px);
+  padding: var(--sp-pad-y, 7px) var(--sp-pad-x, 14px);
+  border-radius: var(--sp-radius, 999px);
+  background: var(--sp-bg, #fbeaef);
+  color: var(--sp-text, #1a1a1a);
+}
+.t4s-pr-proof.is--center{ margin-left: auto; margin-right: auto; }
+.t4s-pr-proof.is--right{ margin-left: auto; }
+
+/* Overlap scales with the avatar size, so one setting controls the look. */
+.t4s-pr-proof__avatars{
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+}
+.t4s-pr-proof__avatars img{
+  width: var(--sp-avatar, 30px);
+  height: var(--sp-avatar, 30px);
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  border: 2px solid var(--sp-ring, #ffffff);
+}
+.t4s-pr-proof__avatars img + img{
+  margin-left: calc(var(--sp-avatar, 30px) * -0.34);
+}
+
+.t4s-pr-proof__body{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  min-width: 0;
+  font-size: var(--sp-size, 13px);
+  line-height: 1.4;
+}
+.t4s-pr-proof__names{
+  font-weight: 700;
+}
+.t4s-pr-proof__msg,
+.t4s-pr-proof__msg p{
+  margin: 0;
+  color: inherit;
+  font-weight: 400;
+}
+.t4s-pr-proof__msg strong,
+.t4s-pr-proof__msg b{
+  font-weight: 700;
+}
+.t4s-pr-proof__tick{
+  flex: 0 0 auto;
+  width: var(--sp-tick, 15px);
+  height: var(--sp-tick, 15px);
+  display: block;
+}
+
+@media (min-width: 768px){
+  .t4s-pr-proof.is--mobile-only{ display: none; }
+}
+@media (max-width: 767px){
+  .t4s-pr-proof.is--desktop-only{ display: none; }
+  .t4s-pr-proof{
+    gap: 8px;
+    padding: var(--sp-pad-y-mb, 6px) var(--sp-pad-x-mb, 11px);
+  }
+  .t4s-pr-proof__body{
+    font-size: var(--sp-size-mb, 12px);
+  }
+}
