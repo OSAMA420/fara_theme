@@ -24,6 +24,31 @@
     "main": {
       "type": "main-product",
       "blocks": {
+        "social_proof_VeUD3g": {
+          "type": "social_proof",
+          "settings": {
+            "avatar1": "shopify://shop_images/0.jpg",
+            "avatar2": "shopify://shop_images/3_2fe5f8f8-9639-40c9-a12b-395cefb4da2a.jpg",
+            "avatar_size": 30,
+            "names": "Rehan Tariq, Usman",
+            "message": "<p>Joined 10,000+ happy customers</p>",
+            "show_tick": true,
+            "tick_label": "Verified",
+            "visibility": "all",
+            "bg_color": "#E3E8ED",
+            "text_color": "#1a1a1a",
+            "ring_color": "#ffffff",
+            "tick_color": "#1d9bf0",
+            "align": "left",
+            "size": 13,
+            "tick_size": 15,
+            "radius": 50,
+            "pad_y": 7,
+            "pad_x": 14,
+            "space_top": 0,
+            "space_bottom": 12
+          }
+        },
         "countdown_QFtHBg": {
           "type": "countdown",
           "disabled": true,
@@ -209,7 +234,7 @@
             "text": "{{ product.metafields.custom.notice_text | metafield_tag }}",
             "subtext": "{{ product.metafields.custom.notice_sub | metafield_tag }}",
             "visibility": "all",
-            "bg_color": "#EFEFEF",
+            "bg_color": "#efefef",
             "text_color": "#1a1a1a",
             "align": "center",
             "size": 15,
@@ -344,6 +369,7 @@
         }
       },
       "block_order": [
+        "social_proof_VeUD3g",
         "countdown_QFtHBg",
         "d5b7b0a4-fb63-44fc-9d84-10e7223a983d",
         "3eaacecf-c956-46e5-84ef-40474509a065",
