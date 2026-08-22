@@ -206,17 +206,19 @@
         "notice_zd3XQC": {
           "type": "notice",
           "settings": {
-            "text": "<p>Open Parcel — Check Before Pay</p>",
-            "subtext": "",
+            "text": "{{ product.metafields.custom.notice_text | metafield_tag }}",
+            "subtext": "{{ product.metafields.custom.notice_sub | metafield_tag }}",
             "visibility": "all",
-            "bg_color": "#c9c9c9",
+            "bg_color": "#EFEFEF",
             "text_color": "#1a1a1a",
             "align": "center",
             "size": 15,
             "size_sub": 14,
             "radius": 20,
             "pad_y": 12,
-            "pad_x": 12
+            "pad_x": 12,
+            "space_top": -35,
+            "space_bottom": 12
           }
         },
         "6927e5dd-04a4-4db6-a60c-76fab4d0069a": {

@@ -2972,11 +2972,6 @@
         "disabled": false,
         "settings": {}
       },
-      "12496620199502360302": {
-        "type": "shopify://apps/fs-volume-discount-bundles/blocks/fs_ft_ai/019999bc-3553-75f2-a751-5be39d9372b9",
-        "disabled": false,
-        "settings": {}
-      },
       "3138269044488530766": {
         "type": "shopify://apps/uppromote-affiliate/blocks/core-script/64c32457-930d-4cb9-9641-e24c0d9cf1f4",
         "disabled": false,
@@ -2994,6 +2989,11 @@
       },
       "4727195953647268973": {
         "type": "shopify://apps/doran-shoppable-videos/blocks/app-embed/9f421243-1cc3-42c0-8a88-49922de1eacf",
+        "disabled": false,
+        "settings": {}
+      },
+      "12496620199502360302": {
+        "type": "shopify://apps/eazify-bundles/blocks/fs_ft_ai/019999bc-3553-75f2-a751-5be39d9372b9",
         "disabled": false,
         "settings": {}
       }
