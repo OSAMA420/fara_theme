@@ -67,7 +67,6 @@
         "blocks": {
           "announcement-bar-2": {
             "type": "announcement",
-            "disabled": true,
             "settings": {
               "content": "<p>✨ Special Offer! Use code <strong>FARA-FAMILY</strong> at checkout & enjoy Flat 10% OFF on your order! 🛒💨<br/><br/></p>",
               "icons_op": "0",
@@ -89,7 +88,7 @@
           "announcement-bar-1": {
             "type": "announcement",
             "settings": {
-              "content": "<p>Free Shipping! Order 3,999+ & enjoy free delivery [icon_arrow]<br/><br/></p>",
+              "content": "<p>Free Shipping! Order 3,950+ & enjoy free delivery [icon_arrow]<br/><br/></p>",
               "icons_op": "1",
               "icon_awesome": "las la-shipping-fast",
               "btn_link_layout": "2",

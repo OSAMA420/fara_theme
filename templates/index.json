@@ -2624,7 +2624,7 @@
         "marquee_speed": 40,
         "marquee_pause": true,
         "fade_edges": true,
-        "card_width": 150,
+        "card_width": 110,
         "card_gap": 14,
         "logo_height": 120,
         "card_radius": 14,
