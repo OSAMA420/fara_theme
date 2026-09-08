@@ -106,13 +106,13 @@
                         {%- if forloop.first -%}
                               <img class="t4s-img-as-bg t4s-d-md-none t4s-slide__{{ bk_stts.animate_slide }} lazyloadt4sNative t4s-lz--fadeIn"
                               srcset="{{ img_url_w_mb0 }}375{{ img_url_w_mb1 }} 375w, {{ img_url_w_mb0 }}550{{ img_url_w_mb1 }} 550w, {{ img_url_w_mb0 }}750{{ img_url_w_mb1 }} 750w, {{ img_url_w_mb0 }}1100{{ img_url_w_mb1 }} 1100w, {{ img_url_w_mb0 }}1500{{ img_url_w_mb1 }} 1500w, {{ img_url_w_mb0 }}1780{{ img_url_w_mb1 }} 1780w, {{ img_url_w_mb0 }}2000{{ img_url_w_mb1 }} 2000w, {{ img_url_w_mb0 }}3000{{ img_url_w_mb1 }} 3000w,{{ img_url_w_mb0 }}3840{{ img_url_w_mb1 }} 3840w, {{ mb_image | image_url }} {{ mb_image.width }}w"
-                              sizes="(min-width: 768pxpx) 768px,100vw" src="{{ img_url_w_mb0 }}1500{{ img_url_w_mb1 }}"
-                              loading="lazy" onload="loadImageT4s(this)" alt="{{ mb_image.alt | escape }}" width="{{ mb_image.width }}" height="{{ mb_image.height }}">
+                              sizes="(min-width: 768px) 768px, 100vw" src="{{ img_url_w_mb0 }}1500{{ img_url_w_mb1 }}"
+                              loading="eager" fetchpriority="high" onload="loadImageT4s(this)" alt="{{ mb_image.alt | escape }}" width="{{ mb_image.width }}" height="{{ mb_image.height }}">
                               <span class="lazyloadt4s-loader is-bg-img t4s-d-md-none" style="background: {{ url_img_mb }}"></span>
                               <img class="t4s-img-as-bg t4s-d-none t4s-d-md-block t4s-slide__{{ bk_stts.animate_slide }} lazyloadt4sNative t4s-lz--fadeIn"
                               srcset="{{ img_url_w0 }}375{{ img_url_w1 }} 375w, {{ img_url_w0 }}550{{ img_url_w1 }} 550w, {{ img_url_w0 }}750{{ img_url_w1 }} 750w, {{ img_url_w0 }}1100{{ img_url_w1 }} 1100w, {{ img_url_w0 }}1500{{ img_url_w1 }} 1500w, {{ img_url_w0 }}1780{{ img_url_w1 }} 1780w, {{ img_url_w0 }}2000{{ img_url_w1 }} 2000w, {{ img_url_w0 }}3000{{ img_url_w1 }} 3000w,{{ img_url_w0 }}3840{{ img_url_w1 }} 3840w, {{ image | image_url }} {{ image.width }}w"
                               sizes="{{ size_img }}" src="{{ img_url_w0 }}1500{{ img_url_w1 }}"
-                              loading="lazy" onload="loadImageT4s(this)" alt="{{ image.alt | escape }}" width="{{ image.width }}" height="{{ image.height }}">
+                              loading="eager" fetchpriority="high" onload="loadImageT4s(this)" alt="{{ image.alt | escape }}" width="{{ image.width }}" height="{{ image.height }}">
                               <span class="lazyloadt4s-loader is-bg-img t4s-d-none t4s-d-md-block" style="background: {{ url_img }}"></span>
                         {%- else -%}
                             <img class="lazyloadt4s t4s-lz--fadeIn t4s-img-as-bg t4s-d-md-none t4s-slide__{{ bk_stts.animate_slide }}" data-src="{{ img_1_mb }}" data-widths="[375, 575, 750]" data-optimumx="1.5" data-sizes="auto" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="{{ mb_image.width }}" height="{{ mb_image.height }}" alt="{{ mb_image.alt | escape }}">
