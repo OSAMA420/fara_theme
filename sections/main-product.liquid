@@ -1197,7 +1197,7 @@ t4option0_0 | alt text
                     {%- when '@app' -%}
                       {%- render block -%}
         
-                    {%- when 'complimentary_products' and product.metafields.shopify--discovery--product_recommendation.complementary_products.value != null -%}
+                    {%- when 'complimentary_products' -%}
                       <div class="t4s-complimentary">
                         <h3>{{ block.settings.text }}</h3>
                         <ul class="t4s-complimentary_products">
@@ -5782,4 +5782,14 @@ t4option0_0 | alt text
   <div id='judgeme_product_reviews' class='jdgm-widget jdgm-review-widget' data-product-title='{{ product.title | escape }}' data-id='{{ product.id }}' data-auto-install='false'> 
     {{ product.metafields.judgeme.widget }} 
   </div> 
-<!-- End of Judge.me code -->
+<!-- End of Judge.me code -->{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- when 'complimentary_products' and product.metafields.shopify--discovery--product_recommendation.complementary_products.value
+    != null -%}"
+  to: "{%- when 'complimentary_products' -%}"
+  position: 95692..95729
+{%- endcomment -%}
