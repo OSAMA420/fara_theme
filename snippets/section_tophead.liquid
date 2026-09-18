@@ -3,7 +3,10 @@
 	<div class="t4s-top-heading t4s_des_title_{{ se_stts.design_heading }} {% if se_stts.heading_center %}t4s-text-center{% endif %} {%- if se_stts.top_subheading != blank -%} t4s-has-section-des{% endif %}" {% if get_height %}data-get-height{% endif %} style="--tophead-mb: {{ se_stts.tophead_mb }}px;--tophead-mb-tb: {{ se_stts.tophead_mb_tb }}px;--tophead-mb-mb: {{ se_stts.tophead_mb_mb }}px;" timeline hdt-reveal="slide-in">
 		{%- if heading_image != blank -%} <div class="t4s-heading-image"> <img class="lazyloadt4s t4s-lz--fadeIn" data-src="{{ heading_image | image_url: width: 1 }}" data-widths="[100,200,400,600,700,800,900,1000,1200,1400,1600]" data-optimumx="2" data-sizes="auto" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="{{ heading_image.width }}" height="{{ heading_image.height }}" alt="{{ heading_image.alt | escape }}">
         </div>{%- endif -%}
-		{%- if se_stts.top_heading != blank -%}<h3 class="t4s-section-title t4s-title"><span>{{ se_stts.top_heading | replace:"[", "<span class='t4s-heading-highlight'>" | replace:"]", "</span>" }}</span></h3>{%- endif -%}
+		{%- if se_stts.top_heading != blank -%}
+			<h3 class="t4s-section-title t4s-title{% if se_stts.heading_typewriter %} t4s-heading-typewriter{% endif %}"{% if se_stts.heading_typewriter %} data-typewriter data-typewriter-text="{{ se_stts.top_heading | strip_html | escape }}"{% endif %}><span>{{ se_stts.top_heading | replace:"[", "<span class='t4s-heading-highlight'>" | replace:"]", "</span>" }}</span></h3>
+			{%- if se_stts.heading_typewriter -%}{% render 'heading-typewriter-script' %}{%- endif -%}
+		{%- endif -%}
 		{%- if se_stts.design_heading == "3" -%}
 			<div class="t4s-heading-char t4s-d-flex {% if se_stts.heading_center %}t4s-justify-content-center{% endif %}">
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="118 82.1 385.5 42">

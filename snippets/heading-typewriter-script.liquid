@@ -1,0 +1,68 @@
+<style>
+  .t4s-heading-typewriter span::after {
+    content: '';
+    display: inline-block;
+    width: 2px;
+    height: 0.9em;
+    margin-left: 2px;
+    background: currentColor;
+    vertical-align: -0.1em;
+    animation: t4sTypewriterBlink 0.9s step-end infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .t4s-heading-typewriter span::after { animation: none; }
+  }
+  @keyframes t4sTypewriterBlink {
+    50% { opacity: 0; }
+  }
+</style>
+<script>
+  (function () {
+    if (window.__t4sTypewriterInit) return;
+    window.__t4sTypewriterInit = true;
+
+    var TYPE_SPEED = 70;    // ms per character while typing
+    var ERASE_SPEED = 40;   // ms per character while erasing
+    var HOLD_FULL = 1800;   // ms to wait once fully typed
+    var HOLD_EMPTY = 500;   // ms to wait once fully erased
+
+    function runLoop(el) {
+      var span = el.querySelector('span') || el;
+      var text = el.getAttribute('data-typewriter-text') || span.textContent.trim();
+      var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduced || !text) { span.textContent = text; return; }
+
+      var i = 0;
+      var typing = true;
+
+      function tick() {
+        if (typing) {
+          i++;
+          span.textContent = text.slice(0, i);
+          if (i >= text.length) { typing = false; setTimeout(tick, HOLD_FULL); return; }
+          setTimeout(tick, TYPE_SPEED);
+        } else {
+          i--;
+          span.textContent = text.slice(0, i);
+          if (i <= 0) { typing = true; setTimeout(tick, HOLD_EMPTY); return; }
+          setTimeout(tick, ERASE_SPEED);
+        }
+      }
+      tick();
+    }
+
+    function init() {
+      document.querySelectorAll('[data-typewriter]').forEach(function (el) {
+        if (el.__t4sTypewriterStarted) return;
+        el.__t4sTypewriterStarted = true;
+        runLoop(el);
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
