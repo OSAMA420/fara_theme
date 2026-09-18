@@ -126,7 +126,7 @@
             "show_options": false,
             "show_vendor": false,
             "show_type": false,
-            "show_sku": true,
+            "show_sku": false,
             "show_barcode": false,
             "show_available": false,
             "show_category": false,

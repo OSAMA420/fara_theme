@@ -505,12 +505,11 @@
     },
     "featured_collection_wJRm3K": {
       "type": "featured-collection",
-      "disabled": true,
       "name": "Featured collection",
       "settings": {
         "design_heading": "5",
         "heading_center": true,
-        "top_heading": "Limited Time Offer – Flat 50% OFF",
+        "top_heading": "Clearance Sale – Flat 50% OFF",
         "top_subheading": "<h5><strong><br/></strong></h5>",
         "head_bigger": false,
         "tophead_mb": 30,
