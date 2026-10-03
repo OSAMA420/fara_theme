@@ -13,7 +13,7 @@ Aakhri update: 2026-08-24
 |---|---|
 | Store | `faralondon.myshopify.com` (live domain: `faralondon.com`) |
 | **Live theme** | `unsen-v1-9-3-1` — **#144548528304** |
-| Dev theme | `Development (2a8aa5-Fara-Osama)` — #147357761712 (updated 2026-09-18; older dev themes get replaced from time to time — if this ID 404s, run `shopify theme list --store=faralondon.myshopify.com` to find the current `[development]` one) |
+| Dev theme | `Development (98cf40-Fara-Osama)` — #150036283568 (updated 2026-10-03; older dev themes get replaced from time to time — if this ID 404s, run `shopify theme list --store=faralondon.myshopify.com` to find the current `[development]` one) |
 | Backup theme | `BACKUP live before feature-highlights 2026-08-07` — #146901926064 |
 | Local folder | `Desktop/local_theme_fara` |
 | GitHub | `github.com/OSAMA420/fara_theme` (branch `main`) |

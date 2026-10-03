@@ -134,6 +134,39 @@ t4sp-theme no-js t4s-wrapper__{{ settings.general_layout }} rtl_{{ isRTL }} swat
     
     <script src="{{ 'lazysizes.min.js' | asset_url }}" async="async"></script>
     <script src="{{ 'global.min.js' | asset_url }}" defer="defer"></script>
+    <script>
+      /* King Product Options' app embed injects bottom.css from its own server
+         (option.ymq.cool) as a plain <link>. Its `async` attribute does nothing on
+         a stylesheet, so a slow response there held first paint for 7s+ on every
+         product page. Swap it for a script-inserted, print-media copy as the parser
+         adds it: browsers never render-block on that, and it switches to `all`
+         once loaded so the bundle option pickers still get their styles. */
+      (function () {
+        if (!window.MutationObserver) return;
+        var SLOW = 'option.ymq.cool/option/bottom.css';
+        var mo = new MutationObserver(function (records) {
+          for (var i = 0; i < records.length; i++) {
+            var added = records[i].addedNodes;
+            for (var j = 0; j < added.length; j++) {
+              var n = added[j];
+              if (n.tagName === 'LINK' && n.rel === 'stylesheet' && n.href.indexOf(SLOW) !== -1 && !n.hasAttribute('data-deferred')) {
+                var copy = document.createElement('link');
+                copy.rel = 'stylesheet';
+                copy.href = n.href;
+                copy.media = 'print';
+                copy.setAttribute('data-deferred', '');
+                copy.onload = function () { this.media = 'all'; };
+                n.parentNode.replaceChild(copy, n);
+                mo.disconnect();
+                return;
+              }
+            }
+          }
+        });
+        mo.observe(document.documentElement, { childList: true, subtree: true });
+        document.addEventListener('DOMContentLoaded', function () { mo.disconnect(); });
+      })();
+    </script>
     {{ content_for_header }}
     {%- render 'head_assets', t_name: t_name, isRTL: isRTL -%}
     
