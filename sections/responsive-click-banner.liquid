@@ -83,7 +83,15 @@
   {% endif %}
 
   {% if img != blank %}
-    <img src="{{ img | image_url: width: 2000 }}" alt="Banner">
+    <img
+      src="{{ img | image_url: width: 1200 }}"
+      srcset="{{ img | image_url: width: 480 }} 480w, {{ img | image_url: width: 768 }} 768w, {{ img | image_url: width: 1100 }} 1100w, {{ img | image_url: width: 1500 }} 1500w, {{ img | image_url: width: 2000 }} 2000w"
+      sizes="100vw"
+      width="{{ img.width }}"
+      height="{{ img.height }}"
+      loading="lazy"
+      alt="{{ img.alt | default: 'Banner' | escape }}"
+    >
   {% else %}
     <img src="https://via.placeholder.com/2000x800" alt="Banner">
   {% endif %}
