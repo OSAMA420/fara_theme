@@ -1818,6 +1818,17 @@
         padding: 7px 4px 6px;
         line-height: 1;
         gap: 4px;
+        display: flex;
+    }
+    .t4s-product:not(.t4s-pr-style4):not(.t4s-pr-style6) .t4s-product-btns > a .t4s-svg-pr-icon {
+        position: static;
+        transform: none;
+        width: auto;
+        height: auto;
+        order: -1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .t4s-product:not(.t4s-pr-style4):not(.t4s-pr-style6) .t4s-product-btns > a .t4s-text-pr {
         display: block;
