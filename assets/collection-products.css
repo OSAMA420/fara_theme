@@ -1808,3 +1808,23 @@
         margin-bottom: 5px;
     }
 }
+
+/* Mobile/tablet: small label under Quick view / Add to cart icons */
+@media (max-width: 1024px) {
+    .t4s-product:not(.t4s-pr-style4):not(.t4s-pr-style6) .t4s-product-btns > a {
+        flex-direction: column;
+        height: auto;
+        min-height: 50px;
+        padding: 7px 4px 6px;
+        line-height: 1;
+        gap: 4px;
+    }
+    .t4s-product:not(.t4s-pr-style4):not(.t4s-pr-style6) .t4s-product-btns > a .t4s-text-pr {
+        display: block;
+        width: 100%;
+        height: auto;
+        line-height: 1.2;
+        font-size: 10px;
+        letter-spacing: 0.02em;
+    }
+}
