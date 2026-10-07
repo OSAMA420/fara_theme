@@ -1,8 +1,14 @@
 .t4s-product-badges{
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: var(--pbadge-gap, 10px);
   margin: 12px 0;
+}
+/* Row 1 holds badges 1-3, row 2 holds badges 4-5. */
+.t4s-product-badges__row{
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pbadge-gap, 10px);
 }
 .t4s-product-badge{
   display: inline-flex;
@@ -39,6 +45,9 @@
    the badge dropping onto its own line. */
 @media (max-width: 767px){
   .t4s-product-badges{
+    gap: var(--pbadge-gap-mb, 6px);
+  }
+  .t4s-product-badges__row{
     flex-wrap: nowrap;
     gap: var(--pbadge-gap-mb, 6px);
   }

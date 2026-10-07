@@ -732,7 +732,7 @@ t4option0_0 | alt text
                           whole block stays off on products that have no values.
                         endcomment
                         assign pbadge_any = false
-                        for i in (1..3)
+                        for i in (1..5)
                           assign key_txt = 'badge' | append: i | append: '_text'
                           if bk_stts[key_txt] != blank
                             assign pbadge_any = true
@@ -743,19 +743,46 @@ t4option0_0 | alt text
                         endif
                       -%}
                       <div class="t4s-product-badges" style="--pbadge-bg:{{ bk_stts.badge_bg | default: '#ffffff' }};--pbadge-border:{{ bk_stts.badge_border | default: '#e6e6e6' }};--pbadge-text:{{ bk_stts.badge_text_color | default: '#1a1a1a' }};--pbadge-gap:{{ bk_stts.badge_gap | default: 10 }}px" {{ block.shopify_attributes }}>
-                        {%- for i in (1..3) -%}
+                        {%- comment -%} Row 1 = badges 1-3, row 2 = badges 4-5. A row only renders if one of its badges has text. {%- endcomment -%}
+                        {%- for row in (1..2) -%}
                           {%- liquid
-                            assign key_icon = 'badge' | append: i | append: '_icon'
-                            assign key_txt = 'badge' | append: i | append: '_text'
-                            assign b_icon = bk_stts[key_icon] | default: 'verified'
-                            assign b_text = bk_stts[key_txt]
-                            assign b_uid = block.id | append: '-' | append: i
+                            if row == 1
+                              assign row_from = 1
+                              assign row_to = 3
+                            else
+                              assign row_from = 4
+                              assign row_to = 5
+                            endif
+                            assign row_any = false
+                            for i in (row_from..row_to)
+                              assign key_txt = 'badge' | append: i | append: '_text'
+                              if bk_stts[key_txt] != blank
+                                assign row_any = true
+                              endif
+                            endfor
                           -%}
-                          {%- if b_text != blank -%}
-                            <span class="t4s-product-badge">
-                              <span class="t4s-product-badge__icon">{% render 'icon-product-badge', icon: b_icon, uid: b_uid %}</span>
-                              <span class="t4s-product-badge__text">{{ b_text }}</span>
-                            </span>
+                          {%- if row_any -%}
+                            <div class="t4s-product-badges__row">
+                              {%- for i in (row_from..row_to) -%}
+                                {%- liquid
+                                  assign key_icon = 'badge' | append: i | append: '_icon'
+                                  assign key_txt = 'badge' | append: i | append: '_text'
+                                  if i > 3
+                                    assign b_icon = bk_stts[key_icon] | default: 'tick'
+                                  else
+                                    assign b_icon = bk_stts[key_icon] | default: 'verified'
+                                  endif
+                                  assign b_text = bk_stts[key_txt]
+                                  assign b_uid = block.id | append: '-' | append: i
+                                -%}
+                                {%- if b_text != blank -%}
+                                  <span class="t4s-product-badge">
+                                    <span class="t4s-product-badge__icon">{% render 'icon-product-badge', icon: b_icon, uid: b_uid %}</span>
+                                    <span class="t4s-product-badge__text">{{ b_text }}</span>
+                                  </span>
+                                {%- endif -%}
+                              {%- endfor -%}
+                            </div>
                           {%- endif -%}
                         {%- endfor -%}
                       </div>
@@ -2943,7 +2970,7 @@ t4option0_0 | alt text
       "settings": [
         {
           "type": "paragraph",
-          "content": "Pill badges such as \"Formulated In France\" or \"Trending On Insta\". A badge only appears when its text is filled in, and the whole block disappears when all three are empty. For per-product badges, create product metafields (Settings > Custom data > Products) and connect each icon and text field below to one using the dynamic source (lightning) icon, leaving the fields blank here."
+          "content": "Pill badges such as \"Formulated In France\" or \"Trending On Insta\". A badge only appears when its text is filled in, and the whole block disappears when all five are empty. Badges 1-3 sit on the first row, badges 4-5 on a second row below. For per-product badges, create product metafields (Settings > Custom data > Products) and connect each icon and text field below to one using the dynamic source (lightning) icon, leaving the fields blank here."
         },
         {
           "type": "header",
@@ -2990,6 +3017,38 @@ t4option0_0 | alt text
         {
           "type": "text",
           "id": "badge3_text",
+          "label": "Text",
+          "info": "Leave blank to hide this badge."
+        },
+        {
+          "type": "header",
+          "content": "+ Badge 4 (second row)"
+        },
+        {
+          "type": "text",
+          "id": "badge4_icon",
+          "label": "Icon",
+          "info": "Leave blank for the simple tick. Or type one of: tick, instagram, facebook, tiktok, france, globe, award, verified, star, leaf"
+        },
+        {
+          "type": "text",
+          "id": "badge4_text",
+          "label": "Text",
+          "info": "Leave blank to hide this badge."
+        },
+        {
+          "type": "header",
+          "content": "+ Badge 5 (second row)"
+        },
+        {
+          "type": "text",
+          "id": "badge5_icon",
+          "label": "Icon",
+          "info": "Leave blank for the simple tick. Or type one of: tick, instagram, facebook, tiktok, france, globe, award, verified, star, leaf"
+        },
+        {
+          "type": "text",
+          "id": "badge5_text",
           "label": "Text",
           "info": "Leave blank to hide this badge."
         },
