@@ -723,6 +723,102 @@ t4option0_0 | alt text
                                alt="{{ cmp_img.alt | default: bk_stts.heading | escape }}">
                         </div>
                       </div>
+                    {%- when 'review_slider' -%}
+                      {%- liquid
+                        comment
+                          Swipe slider for review screenshots. Hidden when image 1 is empty,
+                          so connect the images to product metafields (File) and leave them
+                          blank here to show different reviews per product.
+                        endcomment
+                        assign rs_count = 0
+                        for i in (1..4)
+                          assign rs_key = 'image' | append: i
+                          if bk_stts[rs_key] != blank
+                            assign rs_count = rs_count | plus: 1
+                          endif
+                        endfor
+                        if rs_count == 0
+                          continue
+                        endif
+                        echo 'product-review-slider.css' | asset_url | stylesheet_tag
+                        assign rs_class = ''
+                        if bk_stts.visibility == 'mobile'
+                          assign rs_class = ' is--mobile-only'
+                        elsif bk_stts.visibility == 'desktop'
+                          assign rs_class = ' is--desktop-only'
+                        endif
+                        if bk_stts.full_width
+                          assign rs_class = rs_class | append: ' is--full-width'
+                        endif
+                        if rs_count == 1
+                          assign rs_class = rs_class | append: ' is--single'
+                        endif
+                        assign rs_autoplay = 0
+                        if bk_stts.autoplay
+                          assign rs_autoplay = bk_stts.interval | default: 4
+                        endif
+                      -%}
+                      <div class="t4s-pr-rslider{{ rs_class }}" data-review-slider data-autoplay="{{ rs_autoplay }}" style="--rs-max-w:{{ bk_stts.max_width | default: 600 }}px;--rs-radius:{{ bk_stts.radius | default: 0 }}px;--rs-space:{{ bk_stts.space | default: 20 }}px;--rs-heading-color:{{ bk_stts.heading_color | default: '#1a1a1a' }}" {{ block.shopify_attributes }}>
+                        {%- if bk_stts.heading != blank -%}<p class="t4s-pr-rslider__heading">{{ bk_stts.heading }}</p>{%- endif -%}
+                        <div class="t4s-pr-rslider__wrap">
+                          <div class="t4s-pr-rslider__track" data-rs-track>
+                            {%- for i in (1..4) -%}
+                              {%- assign rs_key = 'image' | append: i -%}
+                              {%- assign rs_img = bk_stts[rs_key] -%}
+                              {%- if rs_img != blank -%}
+                                <div class="t4s-pr-rslider__slide">
+                                  {{- rs_img | image_url: width: 1200 | image_tag: widths: '320, 480, 640, 800, 1000, 1200', sizes: '(max-width: 767px) 100vw, 600px', loading: 'lazy', alt: rs_img.alt | default: bk_stts.heading -}}
+                                </div>
+                              {%- endif -%}
+                            {%- endfor -%}
+                          </div>
+                          <button type="button" class="t4s-pr-rslider__btn t4s-pr-rslider__btn--prev" data-rs-prev aria-label="Previous"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+                          <button type="button" class="t4s-pr-rslider__btn t4s-pr-rslider__btn--next" data-rs-next aria-label="Next"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+                        </div>
+                        <script>
+                          (function () {
+                            var root = document.currentScript && document.currentScript.parentNode;
+                            if (!root || root.getAttribute('data-rs-ready')) return;
+                            root.setAttribute('data-rs-ready', '1');
+                            var track = root.querySelector('[data-rs-track]');
+                            var slides = track.children;
+                            if (slides.length < 2) return;
+                            var timer = null;
+                            var visible = false;
+                            var held = false;
+                            var secs = parseFloat(root.getAttribute('data-autoplay')) || 0;
+                            var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+                            function index() { return Math.round(track.scrollLeft / track.clientWidth); }
+                            function go(i) {
+                              var n = slides.length;
+                              track.scrollTo({ left: ((i % n) + n) % n * track.clientWidth });
+                            }
+                            function stop() { if (timer) { clearInterval(timer); timer = null; } }
+                            function start() {
+                              stop();
+                              if (!secs || reduce || !visible || held) return;
+                              timer = setInterval(function () { go(index() + 1); }, secs * 1000);
+                            }
+
+                            root.querySelector('[data-rs-prev]').addEventListener('click', function () { go(index() - 1); start(); });
+                            root.querySelector('[data-rs-next]').addEventListener('click', function () { go(index() + 1); start(); });
+                            track.addEventListener('touchstart', function () { held = true; stop(); }, { passive: true });
+                            track.addEventListener('touchend', function () { held = false; start(); }, { passive: true });
+                            track.addEventListener('touchcancel', function () { held = false; start(); }, { passive: true });
+
+                            if ('IntersectionObserver' in window) {
+                              new IntersectionObserver(function (entries) {
+                                visible = entries[0].isIntersecting;
+                                start();
+                              }, { threshold: 0.4 }).observe(root);
+                            } else {
+                              visible = true;
+                              start();
+                            }
+                          })();
+                        </script>
+                      </div>
                     {%- when 'product_badges' -%}
                       {{ 'product-badges.css' | asset_url | stylesheet_tag }}
                       {%- liquid
@@ -2959,6 +3055,114 @@ t4option0_0 | alt text
           "type": "color",
           "id": "heading_color",
           "label": "Heading colour",
+          "default": "#1a1a1a"
+        }
+      ]
+    },
+    {
+      "type": "review_slider",
+      "name": "Review slider",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Swipe slider for customer review screenshots, with arrows and optional auto swipe. Place it above the Comparison image block. The block is hidden on products with no Image 1, so connect each image to a product metafield (Settings > Custom data > Products, type File) with the dynamic source (lightning) icon and leave the field blank here to show different reviews per product."
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Title",
+          "info": "Optional. Shown above the images. Can be connected to a Single line text metafield."
+        },
+        {
+          "type": "image_picker",
+          "id": "image1",
+          "label": "Image 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "image2",
+          "label": "Image 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "image3",
+          "label": "Image 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "image4",
+          "label": "Image 4"
+        },
+        {
+          "type": "checkbox",
+          "id": "autoplay",
+          "label": "Auto swipe",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "interval",
+          "label": "Seconds between swipes",
+          "min": 2,
+          "max": 10,
+          "step": 1,
+          "unit": "s",
+          "default": 4
+        },
+        {
+          "type": "select",
+          "id": "visibility",
+          "label": "Show on",
+          "default": "mobile",
+          "options": [
+            { "value": "all", "label": "All devices" },
+            { "value": "mobile", "label": "Mobile only" },
+            { "value": "desktop", "label": "Desktop only" }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "full_width",
+          "label": "Full width on mobile",
+          "info": "Removes the left and right gap so the images span the whole screen.",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "max_width",
+          "label": "Maximum width",
+          "info": "Ignored on mobile when full width is on.",
+          "min": 260,
+          "max": 900,
+          "step": 20,
+          "unit": "px",
+          "default": 600
+        },
+        {
+          "type": "range",
+          "id": "radius",
+          "label": "Corner radius",
+          "min": 0,
+          "max": 24,
+          "step": 2,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "space",
+          "label": "Space above and below",
+          "min": 0,
+          "max": 48,
+          "step": 4,
+          "unit": "px",
+          "default": 20
+        },
+        {
+          "type": "color",
+          "id": "heading_color",
+          "label": "Title colour",
           "default": "#1a1a1a"
         }
       ]
