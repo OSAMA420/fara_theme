@@ -113,7 +113,11 @@
             "badge2_text": "{{ product.metafields.custom.badge2_text.value }}",
             "badge3_icon": "",
             "badge3_text": "",
-            "badge_bg": "#ffffff",
+            "badge4_icon": "{{ product.metafields.custom.badge4_icon.value }}",
+            "badge4_text": "{{ product.metafields.custom.badge4_text.value }}",
+            "badge5_icon": "{{ product.metafields.custom.badge5_icon.value }}",
+            "badge5_text": "{{ product.metafields.custom.badge5_text.value }}",
+            "badge_bg": "#F5F7FB",
             "badge_border": "#e6e6e6",
             "badge_text_color": "#1a1a1a",
             "badge_gap": 10
@@ -297,6 +301,23 @@
             "carousel_item_in_mobile": 2
           }
         },
+        "review_slider_BiWEht": {
+          "type": "review_slider",
+          "disabled": true,
+          "settings": {
+            "heading": "Customer Reviews",
+            "image1": "shopify://shop_images/Viral_Imperial_Vanilla_Comments_Ad_imperial_2_1.png",
+            "image2": "shopify://shop_images/Viral_in_Pakistan_Social_Comments_imperial_1.png",
+            "autoplay": true,
+            "interval": 4,
+            "visibility": "mobile",
+            "full_width": true,
+            "max_width": 600,
+            "radius": 0,
+            "space": 20,
+            "heading_color": "#1a1a1a"
+          }
+        },
         "comparison_image_FXXxHn": {
           "type": "comparison_image",
           "settings": {
@@ -388,6 +409,7 @@
         "6927e5dd-04a4-4db6-a60c-76fab4d0069a",
         "e8f22b12-b4a8-4a95-b4bc-9a0d2c8075c5",
         "doran_shoppable_videos_basic_widget_RPJTzF",
+        "review_slider_BiWEht",
         "comparison_image_FXXxHn",
         "feature_highlights_iqrdWH",
         "custom_liquid_kieHL7",
@@ -431,7 +453,7 @@
         "tabs_accordion_mb": true,
         "enable_line_tabs": true,
         "tabs_position": "external",
-        "enable_first_tab": false,
+        "enable_first_tab": true,
         "tabs_layout": "default",
         "bg": "#ffffff",
         "bg_mb": "#ffffff",
