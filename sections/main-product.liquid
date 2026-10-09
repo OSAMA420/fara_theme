@@ -869,6 +869,18 @@ t4option0_0 | alt text
                                     assign b_icon = bk_stts[key_icon] | default: 'verified'
                                   endif
                                   assign b_text = bk_stts[key_txt]
+                                  comment
+                                    A badge left on the plain tick gets a fitting icon from its text:
+                                    lasting / hrs / hours -> clock, parfum / perfume / spray / edp -> bottle.
+                                  endcomment
+                                  if b_icon == 'tick' and b_text != blank
+                                    assign b_low = b_text | downcase
+                                    if b_low contains 'lasting' or b_low contains 'hrs' or b_low contains 'hours'
+                                      assign b_icon = 'clock'
+                                    elsif b_low contains 'parfum' or b_low contains 'perfume' or b_low contains 'spray' or b_low contains 'edp'
+                                      assign b_icon = 'bottle'
+                                    endif
+                                  endif
                                   assign b_uid = block.id | append: '-' | append: i
                                 -%}
                                 {%- if b_text != blank -%}
@@ -3232,7 +3244,7 @@ t4option0_0 | alt text
           "type": "text",
           "id": "badge4_icon",
           "label": "Icon",
-          "info": "Leave blank for the simple tick. Or type one of: tick, instagram, facebook, tiktok, france, globe, award, verified, star, leaf"
+          "info": "Leave blank for the simple tick (a text with lasting, hrs, parfum or perfume then gets a clock or bottle automatically). Or type one of: tick, clock, bottle, instagram, facebook, tiktok, france, globe, award, verified, star, leaf"
         },
         {
           "type": "text",
@@ -3248,7 +3260,7 @@ t4option0_0 | alt text
           "type": "text",
           "id": "badge5_icon",
           "label": "Icon",
-          "info": "Leave blank for the simple tick. Or type one of: tick, instagram, facebook, tiktok, france, globe, award, verified, star, leaf"
+          "info": "Leave blank for the simple tick (a text with lasting, hrs, parfum or perfume then gets a clock or bottle automatically). Or type one of: tick, clock, bottle, instagram, facebook, tiktok, france, globe, award, verified, star, leaf"
         },
         {
           "type": "text",
