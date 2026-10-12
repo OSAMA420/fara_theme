@@ -1238,6 +1238,8 @@ t4option0_0 | alt text
                       <div class="t4s-liquid_{{ bk_id }} t4s-pr__custom-liquid" {{ block.shopify_attributes }}>{{ bk_stts.custom_liquid }}</div>
         
                     {%- when '@app' -%}
+                      {%- comment -%} Doran shoppable videos is rendered last, after the external tabs and the review slider. {%- endcomment -%}
+                      {%- if tabs_position == 'external' and block.id contains 'doran_shoppable_videos' %}{% continue %}{% endif -%}
                       {%- render block -%}
         
                     {%- when 'complimentary_products' -%}
@@ -1268,6 +1270,9 @@ t4option0_0 | alt text
     {%- if tabs_position == 'external' -%}
       {%- for rs_block in section.blocks -%}
         {%- if rs_block.type == 'review_slider' -%}<div class="t4s-container">{% render 'product-review-slider', rs_block: rs_block %}</div>{%- endif -%}
+      {%- endfor -%}
+      {%- for app_block in section.blocks -%}
+        {%- if app_block.type == '@app' and app_block.id contains 'doran_shoppable_videos' -%}<div class="t4s-container">{% render app_block %}</div>{%- endif -%}
       {%- endfor -%}
     {%- endif -%}
     
