@@ -117,7 +117,7 @@
             "badge4_text": "{{ product.metafields.custom.badge4_text.value }}",
             "badge5_icon": "{{ product.metafields.custom.badge5_icon.value }}",
             "badge5_text": "{{ product.metafields.custom.badge5_text.value }}",
-            "badge_bg": "#F5F7FB",
+            "badge_bg": "#f5f7fb",
             "badge_border": "#e6e6e6",
             "badge_text_color": "#1a1a1a",
             "badge_gap": 10
@@ -269,13 +269,26 @@
             "space_v_item_mb": "2"
           }
         },
-        "e8f22b12-b4a8-4a95-b4bc-9a0d2c8075c5": {
-          "type": "delivery_ask",
+        "8cb75c19-2a0d-4fb8-9e65-526f24de623b": {
+          "type": "tab_des",
           "settings": {
-            "delivery": true,
-            "page_dr": "shipping-delivery",
-            "ask": true,
-            "phone": true
+            "title": "Description"
+          }
+        },
+        "review_slider_BiWEht": {
+          "type": "review_slider",
+          "settings": {
+            "heading": "Customer Reviews",
+            "image1": "{{ product.metafields.custom.review_image_1.value }}",
+            "image2": "{{ product.metafields.custom.review_image_2.value }}",
+            "autoplay": true,
+            "interval": 4,
+            "visibility": "mobile",
+            "full_width": true,
+            "max_width": 600,
+            "radius": 0,
+            "space": 20,
+            "heading_color": "#1a1a1a"
           }
         },
         "doran_shoppable_videos_basic_widget_RPJTzF": {
@@ -301,25 +314,19 @@
             "carousel_item_in_mobile": 2
           }
         },
-        "review_slider_BiWEht": {
-          "type": "review_slider",
+        "e8f22b12-b4a8-4a95-b4bc-9a0d2c8075c5": {
+          "type": "delivery_ask",
           "disabled": true,
           "settings": {
-            "heading": "Customer Reviews",
-            "image1": "shopify://shop_images/Viral_Imperial_Vanilla_Comments_Ad_imperial_2_1.png",
-            "image2": "shopify://shop_images/Viral_in_Pakistan_Social_Comments_imperial_1.png",
-            "autoplay": true,
-            "interval": 4,
-            "visibility": "mobile",
-            "full_width": true,
-            "max_width": 600,
-            "radius": 0,
-            "space": 20,
-            "heading_color": "#1a1a1a"
+            "delivery": true,
+            "page_dr": "shipping-delivery",
+            "ask": true,
+            "phone": true
           }
         },
         "comparison_image_FXXxHn": {
           "type": "comparison_image",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/FARA_chart_deba40ee-8d60-4c7e-96fd-e657b09e9810.png",
             "heading": "",
@@ -369,12 +376,6 @@
             "custom_liquid": "{% if product.metafields.custom.description_image %}\n  <img\n    src=\"{{ product.metafields.custom.description_image | image_url: width: 1000 }}\"\n    alt=\"{{ product.title | escape }}\"\n    width=\"1000\"\n    loading=\"lazy\"\n    style=\"max-width:100%; height:auto;\"\n  >\n{% endif %}"
           }
         },
-        "8cb75c19-2a0d-4fb8-9e65-526f24de623b": {
-          "type": "tab_des",
-          "settings": {
-            "title": "Description"
-          }
-        },
         "ff4e4ed9-2087-42f7-8182-94e5a5181c84": {
           "type": "tab_add",
           "disabled": true,
@@ -407,13 +408,13 @@
         "form_qcmcbq",
         "notice_zd3XQC",
         "6927e5dd-04a4-4db6-a60c-76fab4d0069a",
-        "e8f22b12-b4a8-4a95-b4bc-9a0d2c8075c5",
-        "doran_shoppable_videos_basic_widget_RPJTzF",
+        "8cb75c19-2a0d-4fb8-9e65-526f24de623b",
         "review_slider_BiWEht",
+        "doran_shoppable_videos_basic_widget_RPJTzF",
+        "e8f22b12-b4a8-4a95-b4bc-9a0d2c8075c5",
         "comparison_image_FXXxHn",
         "feature_highlights_iqrdWH",
         "custom_liquid_kieHL7",
-        "8cb75c19-2a0d-4fb8-9e65-526f24de623b",
         "ff4e4ed9-2087-42f7-8182-94e5a5181c84",
         "3090d62a-b7a8-4f60-9743-2d26b84a78f3"
       ],
