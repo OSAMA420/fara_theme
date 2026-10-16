@@ -3,6 +3,13 @@ Color_pink | alt text
 t4option0_0 | alt text
 {%- endcomment -%}
 <!-- sections/main-product.liquid -->
+{%- comment -%}
+  Discovery sets: the app's "STYLE" dropdown (WITH / WITHOUT GIFT BOX) is hidden. The
+  default option (with gift box) stays selected in the form, only the dropdown is not shown.
+{%- endcomment -%}
+{%- if product.handle == 'customize-discovery-set-for-men' or product.handle == 'customize-tester-bundle-for-women' -%}
+  <style>#option-box-ymq-variant-0{display:none !important}</style>
+{%- endif -%}
 {%- liquid
   assign isProductAvailable = product.available
   if isProductAvailable and settings.variant_remove == '2'
