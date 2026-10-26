@@ -139,6 +139,22 @@
 .t4s-tabs-underline .t4s-tabs-ul .t4s-tab-item a.t4s-active::before {
   width: 100%;
 }
+/* Active tab indicator: underline was white-on-white (--secon-active-cl is #fff), so make it visible */
+.t4s-tabs-underline .t4s-tabs-ul li a::before {
+  bottom: 0;
+  border-bottom-color: var(--pri-cl, #000);
+}
+.t4s-tabs-underline .t4s-tabs-ul li a {
+  opacity: .55;
+  transition: opacity .25s ease;
+}
+.t4s-tabs-underline .t4s-tabs-ul li a.t4s-active,
+.t4s-tabs-underline .t4s-tabs-ul li a:hover {
+  opacity: 1;
+}
+.t4s-tabs-underline .t4s-tabs-ul li a.t4s-active {
+  color: var(--pri-cl, #000);
+}
 .t4s-tabs-dropdown .t4s-tabs-head .t4s-tabs-head-inner {
   position: relative;
 }
