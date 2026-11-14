@@ -67,6 +67,7 @@
         "blocks": {
           "announcement-bar-2": {
             "type": "announcement",
+            "disabled": true,
             "settings": {
               "content": "<p>✨ Special Offer! Use code <strong>FARA-FAMILY</strong> at checkout & enjoy Flat 10% OFF on your order! 🛒💨<br/><br/></p>",
               "icons_op": "0",
@@ -125,6 +126,27 @@
               "dayx": 29
             }
           },
+          "announcement_GTcaKJ": {
+            "type": "announcement",
+            "disabled": true,
+            "settings": {
+              "content": "<p>Today deal sale off 70%. End in [countdown]. Hurry Up!! [icon_arrow]</p>",
+              "icons_op": "0",
+              "icon_awesome": "las la-home",
+              "btn_link_layout": "2",
+              "cl_btn": "#ffffff",
+              "bg_btn": "#000000",
+              "countdown": "2023/12/26",
+              "cd_layout": "1",
+              "txt_day": "days",
+              "txt_h": "h",
+              "txt_m": "m",
+              "txt_s": "s",
+              "bg_cd": "#d51919",
+              "cl_cd": "#ffffff",
+              "dayx": 0
+            }
+          },
           "announcement_Lm3by4": {
             "type": "announcement",
             "disabled": true,
@@ -172,6 +194,7 @@
           "announcement-bar-2",
           "announcement-bar-1",
           "announcement-bar-0",
+          "announcement_GTcaKJ",
           "announcement_Lm3by4",
           "announcement_aHCL3A"
         ],
@@ -1072,7 +1095,7 @@
           "menu_NheC3d": {
             "type": "menu",
             "settings": {
-              "title": "CLERANCE SALE",
+              "title": "CLEARANCE SALE",
               "url": "shopify://collections/clearance-sale-fara-london",
               "open_link": "_self",
               "menu": "",
@@ -1242,11 +1265,25 @@
               "icons_op": "2",
               "icon": ""
             }
+          },
+          "menu_sale1111": {
+            "type": "menu",
+            "settings": {
+              "title": "11.11 SALE",
+              "url": "shopify://collections/all-in-one-sale-collection",
+              "open_link": "_self",
+              "menu": "",
+              "lb": "",
+              "lb_cl": "",
+              "icons_op": "2",
+              "icon": ""
+            }
           }
         },
         "block_order": [
           "mb_nav-0",
           "mb_nav-1",
+          "menu_sale1111",
           "menu_NheC3d",
           "mb_nav-3",
           "menu_T9mWPV",
@@ -2655,7 +2692,7 @@
           "base_DgMHAK": {
             "type": "base",
             "settings": {
-              "title": "CLERANCE SALE",
+              "title": "CLEARANCE SALE",
               "url": "shopify://collections/clearance-sale-fara-london",
               "open_link": "_self",
               "icon": "",
@@ -2791,11 +2828,25 @@
               "pos_sub": "bottom",
               "cus_wid": 268
             }
+          },
+          "base_sale1111": {
+            "type": "base",
+            "settings": {
+              "title": "11.11 SALE",
+              "url": "shopify://collections/all-in-one-sale-collection",
+              "open_link": "_self",
+              "icon": "",
+              "cus_cl": false,
+              "cl": "#ec0101",
+              "lb": "",
+              "lb_cl": ""
+            }
           }
         },
         "block_order": [
           "base_gxVL9q",
           "drop_hqFBk8",
+          "base_sale1111",
           "base_DgMHAK",
           "base_nn94j8",
           "base_qtxYyr",
@@ -2968,21 +3019,6 @@
       },
       "2567389343055140935": {
         "type": "shopify://apps/microsoft-clarity/blocks/clarity_js/31c3d126-8116-4b4a-8ba1-baeda7c4aeea",
-        "disabled": false,
-        "settings": {}
-      },
-      "3138269044488530766": {
-        "type": "shopify://apps/uppromote-affiliate/blocks/core-script/64c32457-930d-4cb9-9641-e24c0d9cf1f4",
-        "disabled": false,
-        "settings": {}
-      },
-      "1996061711396120121": {
-        "type": "shopify://apps/uppromote-affiliate/blocks/message-bar/64c32457-930d-4cb9-9641-e24c0d9cf1f4",
-        "disabled": false,
-        "settings": {}
-      },
-      "9005256451184024879": {
-        "type": "shopify://apps/uppromote-affiliate/blocks/customer-referral/64c32457-930d-4cb9-9641-e24c0d9cf1f4",
         "disabled": false,
         "settings": {}
       },
