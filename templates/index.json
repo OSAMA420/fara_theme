@@ -12,6 +12,48 @@
     "slideshow3_pidGGK": {
       "type": "slideshow3",
       "blocks": {
+        "image_parent_YUtcxT": {
+          "type": "image_parent",
+          "settings": {
+            "image": "shopify://shop_images/Luxury_11.11_Perfume_Sale_Banner.png",
+            "image_mb": "shopify://shop_images/11.11_Perfume_Sale_Poster.png",
+            "image_position": "8",
+            "cl_img": "",
+            "link_img1": "shopify://collections/clearance-sale-fara-london",
+            "open_link": "_self",
+            "animate_slide": "none",
+            "text_align": "center",
+            "text_align_tb": "center",
+            "text_align_mb": "center",
+            "content_width": "container",
+            "cv_pos": 50,
+            "ch_pos": 50,
+            "cv_pos_tb": 50,
+            "ch_pos_tb": 50,
+            "cv_pos_mb": 50,
+            "ch_pos_mb": 50,
+            "bg_overlay": "#000000",
+            "bg_opacity": 0,
+            "bg_content_cl": "#ffffff",
+            "bg_content_op": 0,
+            "content_pd_tb": 15,
+            "content_pd_lr": 15,
+            "content_pd_tb_tb": 15,
+            "content_pd_lr_tb": 15,
+            "content_pd_tb_mb": 10,
+            "content_pd_lr_mb": 10,
+            "border_bl": false,
+            "br_color": "#222222",
+            "br_bg": "#ffffff",
+            "br_opacity": 50,
+            "br_style": "solid",
+            "br_pd": 20,
+            "br_pd_mb": 10,
+            "label_nav": "Season Sale",
+            "time_animation": 1,
+            "animation_delay": 40
+          }
+        },
         "image_parent_YEAP8h": {
           "type": "image_parent",
           "settings": {
@@ -98,6 +140,7 @@
         }
       },
       "block_order": [
+        "image_parent_YUtcxT",
         "image_parent_YEAP8h",
         "image_parent_fPdBcG"
       ],
@@ -322,6 +365,7 @@
         "gallery_item_cXTebM",
         "custom_button_myaU7A"
       ],
+      "disabled": true,
       "custom_css": [],
       "name": "Gallery text accordions",
       "settings": {
@@ -461,13 +505,12 @@
     },
     "featured_collection_wJRm3K": {
       "type": "featured-collection",
-      "disabled": true,
       "name": "Featured collection",
       "settings": {
         "design_heading": "5",
         "heading_center": true,
         "top_heading": "Clearance Sale – Flat 50% OFF",
-        "heading_typewriter": true,
+        "heading_typewriter": false,
         "top_subheading": "<h5><strong><br/></strong></h5>",
         "head_bigger": false,
         "tophead_mb": 30,
