@@ -204,9 +204,13 @@
 
   </div>
 
+  {%- comment -%} Price comes from the Gift Box product itself, so it always matches what the button adds to cart {%- endcomment -%}
+  {%- assign gift_box_product = all_products['fara-men-pour-homme-gift-box'] -%}
   <div class="gift-price">
-      <span class="old">Rs.11,000</span>
-      <span class="new">Rs.6,600</span>
+    {%- if gift_box_product.compare_at_price > gift_box_product.price -%}
+      <span class="old">{{ gift_box_product.compare_at_price | money_without_trailing_zeros }}</span>
+    {%- endif -%}
+      <span class="new">{{ gift_box_product.price | money_without_trailing_zeros }}</span>
   </div>
 
   <button
